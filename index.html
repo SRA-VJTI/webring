@@ -1,299 +1,276 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>SRA Webring</title>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link
-            href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap"
-            rel="stylesheet"
-        />
-        <style>
-            * {
-                margin: 0;
-                padding: 0;
-                box-sizing: border-box;
-            }
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SRA Webring</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-            :root {
-                --bg: #ffffff;
-                --text: #000000;
-                --border: #000000;
-                --gray: #666666;
-            }
+        :root {
+            --bg: #ffffff;
+            --text: #000000;
+            --border: #000000;
+            --gray: #666666;
+        }
 
-            body {
-                font-family:
-                    "Space Grotesk",
-                    -apple-system,
-                    sans-serif;
-                background: var(--bg);
-                color: var(--text);
-                min-height: 100vh;
-                -webkit-font-smoothing: antialiased;
-            }
+        body {
+            font-family: 'Space Grotesk', -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
+        }
 
-            /* Color bar */
-            .color-bar {
-                height: 6px;
-                display: flex;
-            }
+        /* Color bar */
+        .color-bar {
+            height: 6px;
+            display: flex;
+        }
 
-            .color-bar span {
-                flex: 1;
-            }
+        .color-bar span {
+            flex: 1;
+        }
 
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        /* Header */
+        header {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            padding-bottom: 2rem;
+            border-bottom: 2px solid var(--border);
+            margin-bottom: 2rem;
+        }
+
+        .logo {
+            width: 72px;
+            height: 72px;
+            flex-shrink: 0;
+        }
+
+        .header-text h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            line-height: 1;
+            margin-bottom: 0.25rem;
+        }
+
+        .header-text p {
+            font-size: 0.875rem;
+            color: var(--gray);
+            font-weight: 400;
+        }
+
+        /* Section */
+        .section-title {
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 1rem;
+            color: var(--gray);
+        }
+
+        /* Grid */
+        .grid {
+            border: 2px solid var(--border);
+        }
+
+        /* Card */
+        .card {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 1.25rem;
+            text-decoration: none;
+            color: inherit;
+            border-bottom: 1px solid var(--border);
+            transition: background 0.15s ease;
+        }
+
+        .card:last-child {
+            border-bottom: none;
+        }
+
+        .card:hover {
+            background: #f5f5f5;
+        }
+
+        .card-name {
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .card-url {
+            font-size: 0.8125rem;
+            color: var(--gray);
+        }
+
+        .card-arrow {
+            font-size: 1.25rem;
+            opacity: 0.3;
+            transition: all 0.15s ease;
+        }
+
+        .card:hover .card-arrow {
+            opacity: 1;
+            transform: translate(2px, -2px);
+        }
+
+        /* Footer */
+        footer {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 2px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .footer-links a {
+            color: var(--text);
+            text-decoration: none;
+            font-size: 0.8125rem;
+            font-weight: 500;
+            padding-bottom: 2px;
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.15s ease;
+        }
+
+        .footer-links a:hover {
+            border-bottom-color: var(--text);
+        }
+
+        .footer-copy {
+            font-size: 0.75rem;
+            color: var(--gray);
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
             .container {
-                max-width: 800px;
-                margin: 0 auto;
-                padding: 3rem 2rem;
+                padding: 2rem 1rem;
             }
 
-            /* Header */
             header {
-                display: flex;
-                align-items: center;
-                gap: 1.5rem;
-                padding-bottom: 2rem;
-                border-bottom: 2px solid var(--border);
-                margin-bottom: 2rem;
-            }
-
-            .logo {
-                width: 72px;
-                height: 72px;
-                flex-shrink: 0;
-            }
-
-            .header-text h1 {
-                font-size: 2rem;
-                font-weight: 700;
-                letter-spacing: -0.02em;
-                line-height: 1;
-                margin-bottom: 0.25rem;
-            }
-
-            .header-text p {
-                font-size: 0.875rem;
-                color: var(--gray);
-                font-weight: 400;
-            }
-
-            /* Section */
-            .section-title {
-                font-size: 0.75rem;
-                font-weight: 600;
-                text-transform: uppercase;
-                letter-spacing: 0.1em;
-                margin-bottom: 1rem;
-                color: var(--gray);
-            }
-
-            /* Grid */
-            .grid {
-                border: 2px solid var(--border);
-            }
-
-            /* Card */
-            .card {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                padding: 1rem 1.25rem;
-                text-decoration: none;
-                color: inherit;
-                border-bottom: 1px solid var(--border);
-                transition: background 0.15s ease;
-            }
-
-            .card:last-child {
-                border-bottom: none;
-            }
-
-            .card:hover {
-                background: #f5f5f5;
-            }
-
-            .card-name {
-                font-size: 1rem;
-                font-weight: 600;
-            }
-
-            .card-url {
-                font-size: 0.8125rem;
-                color: var(--gray);
-            }
-
-            .card-arrow {
-                font-size: 1.25rem;
-                opacity: 0.3;
-                transition: all 0.15s ease;
-            }
-
-            .card:hover .card-arrow {
-                opacity: 1;
-                transform: translate(2px, -2px);
-            }
-
-            /* Footer */
-            footer {
-                margin-top: 3rem;
-                padding-top: 2rem;
-                border-top: 2px solid var(--border);
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                flex-wrap: wrap;
+                flex-direction: column;
+                align-items: flex-start;
                 gap: 1rem;
             }
 
+            .logo {
+                width: 56px;
+                height: 56px;
+            }
+
+            footer {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
             .footer-links {
-                display: flex;
-                gap: 1.5rem;
+                flex-wrap: wrap;
+                gap: 1rem;
             }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <img src="khopdi.svg" alt="SRA" class="logo">
+            <div class="header-text">
+                <h1>SRA</h1>
+                <p>Society of Robotics & Automation</p>
+            </div>
+        </header>
 
-            .footer-links a {
-                color: var(--text);
-                text-decoration: none;
-                font-size: 0.8125rem;
-                font-weight: 500;
-                padding-bottom: 2px;
-                border-bottom: 1px solid transparent;
-                transition: border-color 0.15s ease;
-            }
+        <section>
+            <p class="section-title">Members</p>
+            <div class="grid" id="members-grid">
+                <!-- Members will be loaded from JSON -->
+            </div>
+        </section>
 
-            .footer-links a:hover {
-                border-bottom-color: var(--text);
-            }
+        <footer>
+            <div class="footer-links">
+                <a href="https://sravjti.in/" target="_blank" rel="noopener">Website</a>
+                <a href="https://github.com/SRA-VJTI" target="_blank" rel="noopener">GitHub</a>
+                <a href="https://www.linkedin.com/company/sra-vjti" target="_blank" rel="noopener">LinkedIn</a>
+                <a href="https://twitter.com/sravjti" target="_blank" rel="noopener">Twitter</a>
+            </div>
+            <p class="footer-copy">Est. 2008 / Mumbai</p>
+        </footer>
+    </div>
 
-            .footer-copy {
-                font-size: 0.75rem;
-                color: var(--gray);
-            }
+    <script>
+        const members = [
+            {
+                "name": "ksagar",
+                "url": "https://ksagar.site",
+                "display_url": "ksagar.site"
+            },
+            {
+                "name": "Shri Vishakh",
+                "url": "https://5iri.me",
+                "display_url": "5iri.me"
+            },
+            {
+                "name": "Sarayu Anantharaman",
+                "url": "https://sarayusapa.github.io",
+                "display_url": "sarayusapa.github.io"
+            },
+            {
+                "name": "Ved Jain",
+                "url": "https://vedjain773.github.io",
+                "display_url": "vedjain773.github.io"
+            },
+        ];
 
-            /* Responsive */
-            @media (max-width: 600px) {
-                .container {
-                    padding: 2rem 1rem;
-                }
-
-                header {
-                    flex-direction: column;
-                    align-items: flex-start;
-                    gap: 1rem;
-                }
-
-                .logo {
-                    width: 56px;
-                    height: 56px;
-                }
-
-                footer {
-                    flex-direction: column;
-                    align-items: flex-start;
-                }
-
-                .footer-links {
-                    flex-wrap: wrap;
-                    gap: 1rem;
-                }
-            }
-        </style>
-    </head>
-    <body>
-        <div class="container">
-            <header>
-                <img src="khopdi.svg" alt="SRA" class="logo" />
-                <div class="header-text">
-                    <h1>SRA</h1>
-                    <p>Society of Robotics & Automation</p>
-                </div>
-            </header>
-
-            <section>
-                <p class="section-title">Members</p>
-                <div class="grid" id="members-grid">
-                    <!-- Members will be loaded from JSON -->
-                </div>
-            </section>
-
-            <footer>
-                <div class="footer-links">
-                    <a href="https://sravjti.in/" target="_blank" rel="noopener"
-                        >Website</a
-                    >
-                    <a
-                        href="https://github.com/SRA-VJTI"
-                        target="_blank"
-                        rel="noopener"
-                        >GitHub</a
-                    >
-                    <a
-                        href="https://www.linkedin.com/company/sra-vjti"
-                        target="_blank"
-                        rel="noopener"
-                        >LinkedIn</a
-                    >
-                    <a
-                        href="https://twitter.com/sravjti"
-                        target="_blank"
-                        rel="noopener"
-                        >Twitter</a
-                    >
-                </div>
-                <p class="footer-copy">Est. 2008 / Mumbai</p>
-            </footer>
-        </div>
-
-        <script>
-            const members = [
-                {
-                    name: "ksagar",
-                    url: "https://ksagar.site",
-                    display_url: "ksagar.site",
-                },
-                {
-                    name: "Shri Vishakh",
-                    url: "https://5iri.me",
-                    display_url: "5iri.me",
-                },
-                {
-                    name: "Sarayu Anantharaman",
-                    url: "https://sarayusapa.github.io",
-                    display_url: "sarayusapa.github.io",
-                },
-                {
-                    name: "Ved Jain",
-                    url: "https://vedjain773.github.io",
-                    display_url: "vedjain773.github.io",
-                },
-            ];
-
-            function loadMembers() {
-                const grid = document.getElementById("members-grid");
-
-                members.forEach((member) => {
-                    const card = document.createElement("a");
-                    card.href = member.url;
-                    card.target = "_blank";
-                    card.rel = "noopener";
-                    card.className = "card";
-
-                    card.innerHTML = `
+        function loadMembers() {
+            const grid = document.getElementById('members-grid');
+            
+            members.forEach(member => {
+                const card = document.createElement('a');
+                card.href = member.url;
+                card.target = '_blank';
+                card.rel = 'noopener';
+                card.className = 'card';
+                
+                card.innerHTML = `
                     <div>
                         <div class="card-name">${member.name}</div>
                         <div class="card-url">${member.display_url}</div>
                     </div>
                     <span class="card-arrow">↗</span>
                 `;
-
-                    grid.appendChild(card);
-                });
-            }
-
-            loadMembers();
-        </script>
-    </body>
+                
+                grid.appendChild(card);
+            });
+        }
+        
+        loadMembers();
+    </script>
+</body>
 </html>
