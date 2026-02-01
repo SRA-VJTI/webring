@@ -4,7 +4,7 @@ Webring serves as a hub to showcase member websites and promote cross-visibility
 ## How to Add Your Website URL
 
 - Fork the Repository
-- Navigate to `index.html`. Find the `const members = [....]`array inside the `<script>` tag. 
+- Navigate to `index.html`. Find the `const members = [....]`array inside the `<script>` tag.
 - Add your entry at the end of the array to maintain the chronological order of members.
 - Format:
 ```javascript
@@ -16,6 +16,17 @@ Webring serves as a hub to showcase member websites and promote cross-visibility
 ```
 - Commit your changes and submit a Pull Request.
 
+## Adding the Webring Button to Your Site
+
+Add this button to your website. Replace `YOUR_SITE` with your domain (e.g., `zainsv.me`):
+
+```html
+<a href="https://sravjti.in/webring/redirect.html?site=YOUR_SITE" title="SRA Webring">
+    <img src="https://sravjti.in/webring/khopdi.svg" alt="SRA Webring" style="width:48px;height:48px;">
+</a>
+```
+
+Click the khopdi to visit the next site in the webring.
 
 ## License 
 ```

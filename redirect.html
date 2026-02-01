@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SRA Webring - Redirecting...</title>
+    <style>
+        body {
+            font-family: 'Space Grotesk', -apple-system, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background: #fff;
+        }
+        .loading {
+            text-align: center;
+        }
+        .loading p {
+            margin-top: 1rem;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="loading">
+        <img src="khopdi.svg" alt="SRA Webring" width="64" height="64">
+        <p>Redirecting...</p>
+    </div>
+
+    <script>
+        const members = [
+            { "name": "ksagar", "url": "https://ksagar.site", "display_url": "ksagar.site" },
+            { "name": "Shri Vishakh", "url": "https://5iri.me", "display_url": "5iri.me" },
+            { "name": "Prajwal Avhad", "url": "https://crisiumnih.github.io", "display_url": "crisiumnih.github.io" },
+            { "name": "Sarayu Anantharaman", "url": "https://sarayusapa.github.io", "display_url": "sarayusapa.github.io" },
+            { "name": "Mehul Totala", "url": "https://coffeempty.github.io/portfolio", "display_url": "coffeempty.github.io" },
+            { "name": "Ved Jain", "url": "https://vedjain773.github.io", "display_url": "vedjain773.github.io" },
+            { "name": "Tirth Gada", "url": "https://dimios45.github.io", "display_url": "dimios45.github.io" },
+            { "name": "Gargi Gupta", "url": "https://gg21-prog.github.io/", "display_url": "gg21-prog.github.io" },
+            { "name": "mustafa", "url": "https://mt-tass.github.io", "display_url": "mt-tass.github.io" },
+            { "name": "Zain", "url": "https://zainsv.me/", "display_url": "zainsv.me" },
+        ];
+
+        function findMemberIndex(site) {
+            return members.findIndex(m =>
+                m.url.includes(site) || m.display_url.includes(site)
+            );
+        }
+
+        function redirect() {
+            const params = new URLSearchParams(window.location.search);
+            const site = params.get('site');
+            const action = params.get('action') || 'next';
+
+            if (!site) {
+                window.location.href = 'index.html';
+                return;
+            }
+
+            const currentIndex = findMemberIndex(site);
+
+            if (currentIndex === -1) {
+                window.location.href = 'index.html';
+                return;
+            }
+
+            let targetIndex;
+
+            switch (action) {
+                case 'prev':
+                    targetIndex = (currentIndex - 1 + members.length) % members.length;
+                    break;
+                case 'next':
+                    targetIndex = (currentIndex + 1) % members.length;
+                    break;
+                case 'random':
+                    do {
+                        targetIndex = Math.floor(Math.random() * members.length);
+                    } while (targetIndex === currentIndex && members.length > 1);
+                    break;
+                default:
+                    targetIndex = (currentIndex + 1) % members.length;
+            }
+
+            window.location.href = 'index.html';
+        }
+
+        redirect();
+    </script>
+</body>
+</html>
