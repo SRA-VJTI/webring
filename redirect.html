@@ -31,16 +31,91 @@
 
     <script>
         const members = [
-            { "name": "ksagar", "url": "https://ksagar.site", "display_url": "ksagar.site" },
-            { "name": "Shri Vishakh", "url": "https://5iri.me", "display_url": "5iri.me" },
-            { "name": "Prajwal Avhad", "url": "https://crisiumnih.github.io", "display_url": "crisiumnih.github.io" },
-            { "name": "Sarayu Anantharaman", "url": "https://sarayusapa.github.io", "display_url": "sarayusapa.github.io" },
-            { "name": "Mehul Totala", "url": "https://coffeempty.github.io/portfolio", "display_url": "coffeempty.github.io" },
-            { "name": "Ved Jain", "url": "https://vedjain773.github.io", "display_url": "vedjain773.github.io" },
-            { "name": "Tirth Gada", "url": "https://dimios45.github.io", "display_url": "dimios45.github.io" },
-            { "name": "Gargi Gupta", "url": "https://gg21-prog.github.io/", "display_url": "gg21-prog.github.io" },
-            { "name": "mustafa", "url": "https://mt-tass.github.io", "display_url": "mt-tass.github.io" },
-            { "name": "Zain", "url": "https://zainsv.me/", "display_url": "zainsv.me" },
+            {
+                "name": "ksagar",
+                "url": "https://ksagar.site",
+                "display_url": "ksagar.site"
+            },
+            {
+                "name": "Shri Vishakh",
+                "url": "https://5iri.me",
+                "display_url": "5iri.me"
+            },
+            {
+                "name": "Prajwal Avhad",
+                "url": "https://crisiumnih.github.io",
+                "display_url": "crisiumnih.github.io"
+            },
+            {
+                "name": "Sarayu Anantharaman",
+                "url": "https://sarayusapa.github.io",
+                "display_url": "sarayusapa.github.io"
+            },
+            {
+                "name": "Mehul Totala",
+                "url": "https://coffeempty.github.io/portfolio",
+                "display_url": "coffeempty.github.io"
+            },
+            {
+                "name": "Ved Jain",
+                "url": "https://vedjain773.github.io",
+                "display_url": "vedjain773.github.io"
+            },
+            {
+                "name": "Tirth Gada",
+                "url": "https://dimios45.github.io",
+                "display_url": "dimios45.github.io"
+            },
+            {
+                "name": "Gargi Gupta",
+                "url": "https://gg21-prog.github.io/",
+                "display_url": "gg21-prog.github.io"
+            },
+            {
+                "name": "mustafa",
+                "url": "https://mt-tass.github.io",
+                "display_url": "mt-tass.github.io"
+            },
+            {
+                "name": "Dhruv Gowda",
+                "url": "https://kernelknight33.github.io/",
+                "display_url": "kernelknight33.github.io"
+            },
+            {
+                "name": "Zain",
+                "url": "https://zainsv.me/",
+                "display_url": "zainsv.me"
+            },
+            {
+                "name": "Bhakti Assar",
+                "url": "https://bhakti-a.github.io/",
+                "display_url": "bhakti-a.github.io"
+            },
+            {
+                "name": "Vrushtee",
+                "url": "https://vruga.site",
+                "display_url": "vruga.site"
+            },
+            {
+                "name": "Shashvat",
+                "url": "https://spr4bhu.github.io",
+                "display_url": "spr4bhu.github.io"
+            },
+            {
+                "name": "Harshit Bhalani",
+                "url": "https://harshit6-b.github.io/",
+                "display_url": "harshit6-b.github.io"
+            },
+            {
+                "name": "Aryan Vyapari",
+                "url": "https://4rynv.github.io/",
+                "display_url": "4rynv.github.io"
+            },
+            {
+                "name": "Varun Patil",
+                "url": "https://varunapatil.github.io/",
+                "display_url": "varunapatil.io"
+            }
         ];
 
         function findMemberIndex(site) {
@@ -84,7 +159,7 @@
                     targetIndex = (currentIndex + 1) % members.length;
             }
 
-            window.location.href = 'index.html';
+            window.location.href = members[targetIndex].url;
         }
 
         redirect();
