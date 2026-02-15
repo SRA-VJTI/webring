@@ -11,9 +11,11 @@ Webring serves as a hub to showcase member websites and promote cross-visibility
 {
     "name": "Your Full Name",
     "url": "https://yourwebsite.com",
-    "display_url": "yourwebsite.com"
+    "display_url": "yourwebsite.com",
+    "year": "year"
 }
 ```
+- Add appropriate year tag from : "sy" , "ty" , "final-year" ,"alumni"
 - Commit your changes and submit a Pull Request.
 
 ## Adding the Webring Button to Your Site
