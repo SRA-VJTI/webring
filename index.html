@@ -22,10 +22,10 @@
             --card-bg:#fafafa;
             --card-hover:#f5f5f5;
             --logo-filter:invert(0);
-            --color-sy: rgba(132,23,44,0.4);
-            --color-ty: rgba(152,255,152,0.4);
+            --color-sy: rgba(180,40,60,0.4);
+            --color-ty: rgba(56,140,56,0.4);
             --color-final : rgba(89,46,131,0.4);
-            --color-alumni : rgba(255,172,28,0.4);
+            --color-alumni : rgba(210,165,50,0.4);
 
         }
         [data-theme="dark"]{
@@ -36,10 +36,10 @@
             --card-bg: #111;
             --card-hover: #161616;
             --logo-filter: invert(1);
-            --color-sy: rgba(132,23,44,0.4);
-            --color-ty: rgba(152,255,152,0.4);
+            --color-sy: rgba(180,40,60,0.4);
+            --color-ty: rgba(56,140,56,0.4);
             --color-final : rgba(89,46,131,0.4);
-            --color-alumni : rgba(255,172,28,0.4);
+            --color-alumni : rgba(210,165,50,0.4);
         }
 
         body {
@@ -243,37 +243,37 @@
         }
 
         .sy .year-badge {
-            border-color: rgba(132, 23, 44, 0.3);
-            color: rgba(132, 23, 44, 0.6);
+            border-color: rgba(180, 40, 60, 0.5);
+            color: rgba(180, 40, 60, 0.8);
         }
 
         .ty .year-badge {
-            border-color: rgba(152, 255, 152, 0.3);
-            color: rgba(152, 255, 152, 0.6);
+            border-color: rgba(56, 140, 56, 0.5);
+            color: rgba(56, 140, 56, 0.8);
         }
 
         .final-year .year-badge {
-            border-color: rgba(89, 46, 131, 0.3);
-            color: rgba(89, 46, 131, 0.6);
+            border-color: rgba(89, 46, 131, 0.5);
+            color: rgba(89, 46, 131, 0.8);
         }
 
         .alumni .year-badge {
-            border-color: rgba(255, 172, 28, 0.3);
-            color: rgba(255, 172, 28, 0.6);
+            border-color: rgba(210, 165, 50, 0.5);
+            color: rgba(210, 165, 50, 0.8);
         }
 
         .card:hover .sy .year-badge,
         .sy.card:hover .year-badge {
-            background: rgb(132, 23, 44);
-            border-color: rgb(132, 23, 44);
+            background: rgb(180, 40, 60);
+            border-color: rgb(180, 40, 60);
             color: white;
         }
 
         .card:hover .ty .year-badge,
         .ty.card:hover .year-badge {
-            background: rgb(152, 255, 152);
-            border-color: rgb(152, 255, 152);
-            color: #000;
+            background: rgb(56, 140, 56);
+            border-color: rgb(56, 140, 56);
+            color: white;
         }
 
         .card:hover .final-year .year-badge,
@@ -285,8 +285,8 @@
 
         .card:hover .alumni .year-badge,
         .alumni.card:hover .year-badge {
-            background: rgb(255, 172, 28);
-            border-color: rgb(255, 172, 28);
+            background: rgb(210, 165, 50);
+            border-color: rgb(210, 165, 50);
             color: #000;
         }
 
@@ -382,7 +382,7 @@
                 <p>Society of Robotics & Automation</p>
             </div>
             <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
-                <span id="theme-icon">🌙</span>
+                <span id="theme-icon">☾</span>
             </button>
         </header>
 
@@ -427,7 +427,7 @@
             localStorage.setItem('theme', newTheme);
             
             const icon = document.getElementById('theme-icon');
-            icon.textContent = newTheme === 'dark' ? '☀️' : '🌙';
+            icon.textContent = newTheme === 'dark' ? '☀' : '☾';
         }
 
         // Load saved theme
@@ -437,7 +437,7 @@
                 document.documentElement.setAttribute('data-theme', 'dark');
                 const icon = document.getElementById('theme-icon');
                 if (icon) {
-                    icon.textContent = '☀️';
+                    icon.textContent = '☀';
                 }
             }
         })();
