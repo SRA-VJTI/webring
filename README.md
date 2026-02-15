@@ -18,15 +18,15 @@ Webring serves as a hub to showcase member websites and promote cross-visibility
 
 ## Adding the Webring Button to Your Site
 
-Add this button to your website. Replace `YOUR_SITE` with your domain (e.g., `zainsv.me`):
+Add this button to your website:
 
 ```html
-<a href="https://sravjti.in/webring/redirect.html?site=YOUR_SITE" title="SRA Webring">
+<a href="https://sravjti.in/webring/" title="SRA Webring">
     <img src="https://sravjti.in/webring/khopdi.svg" alt="SRA Webring" style="width:48px;height:48px;">
 </a>
 ```
 
-Click the khopdi to visit the next site in the webring.
+Click the khopdi to visit the webring hub and see all members.
 
 ## License 
 ```
