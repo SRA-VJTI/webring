@@ -11,22 +11,24 @@ Webring serves as a hub to showcase member websites and promote cross-visibility
 {
     "name": "Your Full Name",
     "url": "https://yourwebsite.com",
-    "display_url": "yourwebsite.com"
+    "display_url": "yourwebsite.com",
+    "year": "year"
 }
 ```
+- Add appropriate year tag from : "sy" , "ty" , "final-year" ,"alumni"
 - Commit your changes and submit a Pull Request.
 
 ## Adding the Webring Button to Your Site
 
-Add this button to your website. Replace `YOUR_SITE` with your domain (e.g., `zainsv.me`):
+Add this button to your website:
 
 ```html
-<a href="https://sravjti.in/webring/redirect.html?site=YOUR_SITE" title="SRA Webring">
+<a href="https://sravjti.in/webring/" title="SRA Webring">
     <img src="https://sravjti.in/webring/khopdi.svg" alt="SRA Webring" style="width:48px;height:48px;">
 </a>
 ```
 
-Click the khopdi to visit the next site in the webring.
+Click the khopdi to visit the webring hub and see all members.
 
 ## License 
 ```

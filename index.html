@@ -19,6 +19,27 @@
             --text: #000000;
             --border: #000000;
             --gray: #666666;
+            --card-bg:#fafafa;
+            --card-hover:#f5f5f5;
+            --logo-filter:invert(0);
+            --color-sy: rgba(180,40,60,0.4);
+            --color-ty: rgba(56,140,56,0.4);
+            --color-final : rgba(89,46,131,0.4);
+            --color-alumni : rgba(210,165,50,0.4);
+
+        }
+        [data-theme="dark"]{
+            --bg: #0a0a0a;
+            --text: #ffffff;
+            --border: #222222;
+            --gray: #888888;
+            --card-bg: #111;
+            --card-hover: #161616;
+            --logo-filter: invert(1);
+            --color-sy: rgba(180,40,60,0.4);
+            --color-ty: rgba(56,140,56,0.4);
+            --color-final : rgba(89,46,131,0.4);
+            --color-alumni : rgba(210,165,50,0.4);
         }
 
         body {
@@ -59,6 +80,7 @@
             width: 72px;
             height: 72px;
             flex-shrink: 0;
+            filter: var(--logo-filter);
         }
 
         .header-text h1 {
@@ -74,6 +96,61 @@
             color: var(--gray);
             font-weight: 400;
         }
+
+        .theme-toggle {
+            margin-left: auto;
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--text);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.25rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+
+        .theme-toggle:hover {
+            border-color: var(--gray);
+            transform: rotate(15deg);
+        }
+
+        /* Filter Navigation */
+        .filter-nav {
+            display: flex;
+            gap: 0.75rem;
+            margin-bottom: 2rem;
+            overflow-x: auto;
+            padding-bottom: 0.5rem;
+        }
+
+        .filter-btn {
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--gray);
+            padding: 0.4rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 0.8rem;
+            white-space: nowrap;
+            transition: all 0.2s;
+        }
+
+        .filter-btn:hover { 
+            border-color: var(--gray); 
+            color: var(--text); 
+        }
+        
+        .filter-btn.active { 
+            background: var(--text); 
+            color: var(--bg); 
+            border-color: var(--text); 
+        }
+        
 
         /* Section */
         .section-title {
@@ -92,6 +169,7 @@
 
         /* Card */
         .card {
+            position: relative;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -99,6 +177,8 @@
             text-decoration: none;
             color: inherit;
             border-bottom: 1px solid var(--border);
+            background: var(--card-bg);
+            overflow: hidden;
             transition: background 0.15s ease;
         }
 
@@ -106,24 +186,121 @@
             border-bottom: none;
         }
 
+        .card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 60%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent 0%, var(--year-color) 80%);
+            opacity: 0;
+            transition: opacity 0.3s, width 0.3s;
+            pointer-events: none;
+        }
+
+        .card:hover::after { 
+            opacity: 1; 
+            width: 70%;
+        }
+
         .card:hover {
-            background: #f5f5f5;
+            background: var(--card-hover);
         }
 
         .card-name {
             font-size: 1rem;
             font-weight: 600;
+            position: relative;
+            z-index: 2;
+            transition: all 0.2s;
+        }
+
+        .card:hover .card-name {
+            font-weight: 700;
+            letter-spacing: -0.01em;
         }
 
         .card-url {
             font-size: 0.8125rem;
             color: var(--gray);
+            position: relative;
+            z-index: 2;
         }
+
+        .year-badge {
+            display: inline-block;
+            padding: 0.2rem 0.4rem;
+            border-radius: 3px;
+            font-size: 0.65rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-left: 0.5rem;
+            border: 1px solid;
+            background: transparent;
+            transition: all 0.2s;
+        }
+
+        .sy .year-badge {
+            border-color: rgba(180, 40, 60, 0.5);
+            color: rgba(180, 40, 60, 0.8);
+        }
+
+        .ty .year-badge {
+            border-color: rgba(56, 140, 56, 0.5);
+            color: rgba(56, 140, 56, 0.8);
+        }
+
+        .final-year .year-badge {
+            border-color: rgba(89, 46, 131, 0.5);
+            color: rgba(89, 46, 131, 0.8);
+        }
+
+        .alumni .year-badge {
+            border-color: rgba(210, 165, 50, 0.5);
+            color: rgba(210, 165, 50, 0.8);
+        }
+
+        .card:hover .sy .year-badge,
+        .sy.card:hover .year-badge {
+            background: rgb(180, 40, 60);
+            border-color: rgb(180, 40, 60);
+            color: white;
+        }
+
+        .card:hover .ty .year-badge,
+        .ty.card:hover .year-badge {
+            background: rgb(56, 140, 56);
+            border-color: rgb(56, 140, 56);
+            color: white;
+        }
+
+        .card:hover .final-year .year-badge,
+        .final-year.card:hover .year-badge {
+            background: rgb(89, 46, 131);
+            border-color: rgb(89, 46, 131);
+            color: white;
+        }
+
+        .card:hover .alumni .year-badge,
+        .alumni.card:hover .year-badge {
+            background: rgb(210, 165, 50);
+            border-color: rgb(210, 165, 50);
+            color: #000;
+        }
+
+        .sy { --year-color: var(--color-sy); }
+        .ty { --year-color: var(--color-ty); }
+        .final-year { --year-color: var(--color-final); }
+        .alumni { --year-color: var(--color-alumni); }
 
         .card-arrow {
             font-size: 1.25rem;
             opacity: 0.3;
             transition: all 0.15s ease;
+            position: relative;
+            z-index: 2;
         }
 
         .card:hover .card-arrow {
@@ -199,12 +376,23 @@
 <body>
     <div class="container">
         <header>
-            <img src="khopdi.svg" alt="SRA" class="logo">
+            <a href="https://sravjti.in"><img src="khopdi.svg" alt="SRA" class="logo"> </a>
             <div class="header-text">
                 <h1>SRA</h1>
                 <p>Society of Robotics & Automation</p>
             </div>
+            <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+                <span id="theme-icon">☾</span>
+            </button>
         </header>
+
+        <nav class="filter-nav">
+            <button class="filter-btn active" onclick="filterList('all')">All</button>
+            <button class="filter-btn" onclick="filterList('sy')">SY</button>
+            <button class="filter-btn" onclick="filterList('ty')">TY</button>
+            <button class="filter-btn" onclick="filterList('final-year')">Final Year</button>
+            <button class="filter-btn" onclick="filterList('alumni')">Alumni</button>
+        </nav>
 
         <section>
             <p class="section-title">Members</p>
@@ -225,136 +413,236 @@
     </div>
 
     <script>
+        // Theme Toggle
+        function toggleTheme() {
+            const html = document.documentElement;
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? '' : 'dark';
+            
+            if (newTheme) {
+                html.setAttribute('data-theme', newTheme);
+            } else {
+                html.removeAttribute('data-theme');
+            }
+            localStorage.setItem('theme', newTheme);
+            
+            const icon = document.getElementById('theme-icon');
+            icon.textContent = newTheme === 'dark' ? '☀' : '☾';
+        }
+
+        // Load saved theme
+        (function() {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark') {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                const icon = document.getElementById('theme-icon');
+                if (icon) {
+                    icon.textContent = '☀';
+                }
+            }
+        })();
+
         const members = [
             {
                 "name": "ksagar",
                 "url": "https://ksagar.site",
-                "display_url": "ksagar.site"
+                "display_url": "ksagar.site",
+                "year" : "ty"
             },
             {
                 "name": "Shri Vishakh",
                 "url": "https://5iri.me",
-                "display_url": "5iri.me"
+                "display_url": "5iri.me",
+                "year":"ty"
             },
             {
                 "name": "Prajwal Avhad",
                 "url": "https://crisiumnih.github.io",
-                "display_url": "crisiumnih.github.io"
+                "display_url": "crisiumnih.github.io",
+                "year":"ty"
             },
             {
                 "name": "Sarayu Anantharaman",
                 "url": "https://sarayusapa.github.io",
-                "display_url": "sarayusapa.github.io"
+                "display_url": "sarayusapa.github.io",
+                "year":"sy"
             },
             {
                 "name": "Mehul Totala",
                 "url": "https://coffeempty.github.io/portfolio",
-                "display_url": "coffeempty.github.io"
+                "display_url": "coffeempty.github.io",
+                "year":"sy"
             },
             {
                 "name": "Ved Jain",
                 "url": "https://vedjain773.github.io",
-                "display_url": "vedjain773.github.io"
+                "display_url": "vedjain773.github.io",
+                "year":"sy"
             },
             {
                 "name": "Tirth Gada",
                 "url": "https://dimios45.github.io",
-                "display_url": "dimios45.github.io"
+                "display_url": "dimios45.github.io",
+                "year":"sy"
             },
             {
                 "name": "Gargi Gupta",
                 "url": "https://gg21-prog.github.io/",
-                "display_url": "gg21-prog.github.io"
+                "display_url": "gg21-prog.github.io",
+                "year":"sy"
             },
             {
                 "name": "mustafa",
                 "url": "https://mt-tass.github.io",
-                "display_url": "mt-tass.github.io"
+                "display_url": "mt-tass.github.io",
+                "year":"sy"
             },
             {
                 "name": "Dhruv Gowda",
                 "url": "https://kernelknight33.github.io/",
-                "display_url": "kernelknight33.github.io"
+                "display_url": "kernelknight33.github.io",
+                "year":"sy"
             },
                 
             {
                 "name": "Zain",
                 "url": "https://zainsv.me/",
-                "display_url": "zainsv.me"
+                "display_url": "zainsv.me",
+                "year":"alumni"
             },
             {
                 "name": "Bhakti Assar",
                 "url": "https://bhakti-a.github.io/",
-                "display_url": "bhakti-a.github.io"
+                "display_url": "bhakti-a.github.io",
+                "year":"sy"
             },
             {
                 "name": "Archit More",
                 "url": "https://avm1234567.github.io/",
-                "display_url": "avm1234567.github.io"
+                "display_url": "avm1234567.github.io",
+                "year":"sy"
             },
             {
                 "name": "Vrushtee",
                 "url": "https://vruga.site",
-                "display_url": "vruga.site"
+                "display_url": "vruga.site",
+                "year":"sy"
             },
             {
                 "name": "Shashvat",
                 "url": "https://spr4bhu.github.io",
-                "display_url": "spr4bhu.github.io"
+                "display_url": "spr4bhu.github.io",
+                "year":"sy"
             },
             {
                 "name": "Harshit Bhalani",
                 "url": "https://harshit6-b.github.io/",
-                "display_url": "harshit6-b.github.io"
+                "display_url": "harshit6-b.github.io",
+                "year":"sy"
             },
             {
                 "name": "Aryan Vyapari",
                 "url": "https://4rynv.github.io/",
-                "display_url": "4rynv.github.io"
+                "display_url": "4rynv.github.io",
+                "year":"sy"
             },
             {
                 "name": "Varun Patil",
                 "url": "https://varunapatil.github.io/",
-                "display_url": "varunapatil.io"
+                "display_url": "varunapatil.io",
+                "year":"sy"
             },
             {
                 "name": "Lakshya Lalwani",
                 "url": "https://lakshyaa1.github.io/",
-                "display_url": "lakshyaa1.github.io"
+                "display_url": "lakshyaa1.github.io",
+                "year":"sy"
             },
             {
                 "name": "Sahil Apage",
                 "url": "https://sahilapage.github.io/",
-                "display_url": "sahilapage.github.io"
+                "display_url": "sahilapage.github.io",
+                "year":"sy"
+            },
+            {
+                "name": "Arhan Chavare",
+                "url": "https://badboy1606.github.io/",
+                "display_url": "badboy1606.github.io",
+                "year":"sy"
+            },
+            { 
+                "name" : "abhijeet bhalerao",
+                "url" : "https://abhixb.github.io/",
+                "display_url" : "abhixb.github.io",
+                "year":"sy"
+ 
+            },
+            {
+                "name": "Rishiraj Rajgor",
+                "url": "https://dark-knightshanks.github.io/",
+                "display_url": "dark-knightshanks.github.io",
+                "year":"sy"
+            }, 
+            {
+                "name": "Advait Desai",
+                "url": "https://advait2211.github.io/",
+                "display_url": "advait2211.github.io/",
+                "year":"ty"
+            },
+            {
+                "name": "Vedant Malkar",
+                "url": "https://vedantmalkar.github.io/",
+                "display_url": "vedantmalkar.github.io",
+                "year":"sy"
             },
             {
                 "name": "Sarvaarth Narang",
                 "url": "https://sarvaarthn.github.io/",
-                "display_url": "sarvaarthn.github.io/"
+                "display_url": "sarvaarthn.github.io",
+                "year":"sy"
             }
-
         ];
 
         function loadMembers() {
+            renderMembers('all');
+        }
+        function renderMembers(filter = 'all') {
             const grid = document.getElementById('members-grid');
+            grid.innerHTML = '';
             
-            members.forEach(member => {
+            const filtered = filter === 'all' ? members : members.filter(m => m.year === filter);
+            
+            filtered.forEach(member => {
                 const card = document.createElement('a');
                 card.href = member.url;
                 card.target = '_blank';
                 card.rel = 'noopener';
                 card.className = 'card';
                 
+                // Add year class if member has year property
+                if (member.year) {
+                    card.classList.add(member.year);
+                }
+                
                 card.innerHTML = `
                     <div>
                         <div class="card-name">${member.name}</div>
-                        <div class="card-url">${member.display_url}</div>
+                        <div class="card-url">
+                            ${member.display_url}
+                            ${member.year ? `<span class="year-badge">${member.year.replace('-', ' ')}</span>` : ''}
+                        </div>
                     </div>
                     <span class="card-arrow">↗</span>
                 `;
                 
                 grid.appendChild(card);
             });
+        }
+
+        function filterList(year) {
+            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            renderMembers(year);
         }
         
         loadMembers();
