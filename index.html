@@ -1,17 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SRA Webring</title>
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
     <style>
         * {
             margin: 0;
             padding: 0;
-            box-sizing: border-box; 
+            box-sizing: border-box;
         }
 
         :root {
@@ -19,27 +22,30 @@
             --text: #000000;
             --border: #000000;
             --gray: #666666;
-            --card-bg:#fafafa;
-            --card-hover:#f5f5f5;
-            --logo-filter:invert(0);
-            --color-sy: rgba(180,40,60,0.4);
-            --color-ty: rgba(56,140,56,0.4);
-            --color-final : rgba(89,46,131,0.4);
-            --color-alumni : rgba(210,165,50,0.4);
+            --card-bg: #fafafa;
+            --card-hover: #f5f5f5;
+            --logo-filter: invert(0);
+            --color-sy: rgba(180, 40, 60, 0.4);
+            --color-ty: rgba(56, 140, 56, 0.4);
+            --color-final: rgba(89, 46, 131, 0.4);
+
+            --shadow-color: #000000;
 
         }
-        [data-theme="dark"]{
+
+        [data-theme="dark"] {
             --bg: #0a0a0a;
             --text: #ffffff;
-            --border: #222222;
+            --border: #ffffff;
             --gray: #888888;
             --card-bg: #111;
             --card-hover: #161616;
             --logo-filter: invert(1);
-            --color-sy: rgba(180,40,60,0.4);
-            --color-ty: rgba(56,140,56,0.4);
-            --color-final : rgba(89,46,131,0.4);
-            --color-alumni : rgba(210,165,50,0.4);
+            --color-sy: rgba(180, 40, 60, 0.4);
+            --color-ty: rgba(56, 140, 56, 0.4);
+            --color-final: rgba(89, 46, 131, 0.4);
+
+            --shadow-color: #ffffff;
         }
 
         body {
@@ -121,6 +127,8 @@
         /* Filter Navigation */
         .filter-nav {
             display: flex;
+            justify-content: center;
+            align-items: center;
             gap: 0.75rem;
             margin-bottom: 2rem;
             overflow-x: auto;
@@ -140,17 +148,39 @@
             transition: all 0.2s;
         }
 
-        .filter-btn:hover { 
-            border-color: var(--gray); 
-            color: var(--text); 
+        .filter-btn:hover {
+            border-color: var(--gray);
+            color: var(--text);
         }
-        
-        .filter-btn.active { 
-            background: var(--text); 
-            color: var(--bg); 
-            border-color: var(--text); 
+
+        .filter-btn.active {
+            background: var(--text);
+            color: var(--bg);
+            border-color: var(--text);
         }
-        
+
+        /* Active Filter Colors */
+        /* Active Filter Colors */
+        .filter-btn.ty.active {
+            background: rgba(56, 140, 56, 0.1);
+            border-color: rgb(56, 140, 56);
+            color: rgb(56, 140, 56);
+        }
+
+        .filter-btn.sy.active {
+            background: rgba(180, 40, 60, 0.1);
+            border-color: rgb(180, 40, 60);
+            color: rgb(180, 40, 60);
+        }
+
+        .filter-btn.final-year.active {
+            background: rgba(89, 46, 131, 0.1);
+            border-color: rgb(89, 46, 131);
+            color: rgb(89, 46, 131);
+        }
+
+
+
 
         /* Section */
         .section-title {
@@ -199,8 +229,8 @@
             pointer-events: none;
         }
 
-        .card:hover::after { 
-            opacity: 1; 
+        .card:hover::after {
+            opacity: 1;
             width: 70%;
         }
 
@@ -257,10 +287,7 @@
             color: rgba(89, 46, 131, 0.8);
         }
 
-        .alumni .year-badge {
-            border-color: rgba(210, 165, 50, 0.5);
-            color: rgba(210, 165, 50, 0.8);
-        }
+
 
         .card:hover .sy .year-badge,
         .sy.card:hover .year-badge {
@@ -283,17 +310,21 @@
             color: white;
         }
 
-        .card:hover .alumni .year-badge,
-        .alumni.card:hover .year-badge {
-            background: rgb(210, 165, 50);
-            border-color: rgb(210, 165, 50);
-            color: #000;
+
+
+        .sy {
+            --year-color: var(--color-sy);
         }
 
-        .sy { --year-color: var(--color-sy); }
-        .ty { --year-color: var(--color-ty); }
-        .final-year { --year-color: var(--color-final); }
-        .alumni { --year-color: var(--color-alumni); }
+        .ty {
+            --year-color: var(--color-ty);
+        }
+
+        .final-year {
+            --year-color: var(--color-final);
+        }
+
+
 
         .card-arrow {
             font-size: 1.25rem;
@@ -306,6 +337,238 @@
         .card:hover .card-arrow {
             opacity: 1;
             transform: translate(2px, -2px);
+        }
+
+        /* Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background: var(--bg);
+            border: 2px solid var(--border);
+            padding: 2rem;
+            max-width: 500px;
+            width: 90%;
+            position: relative;
+            transform: scale(0.9);
+            transition: all 0.3s ease;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: scale(1);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: transparent;
+            border: none;
+            color: var(--text);
+            font-size: 1.5rem;
+            cursor: pointer;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            border: 1px solid transparent;
+            transition: all 0.2s;
+        }
+
+        .modal-close:hover {
+            border-color: var(--border);
+            background: var(--card-hover);
+        }
+
+        .modal-image {
+            width: 100%;
+            height: auto;
+            max-height: 60vh;
+            object-fit: contain;
+            background: var(--card-hover);
+            border: 2px solid var(--border);
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .modal-links {
+            margin-top: 1.5rem;
+        }
+
+        .modal-desc {
+            line-height: 1.6;
+            color: var(--gray);
+        }
+
+        /* TY Grid Layout */
+        .ty-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1.5rem;
+            padding: 1rem 0;
+        }
+
+        .ty-card {
+            border: 2px solid var(--border);
+            background: var(--card-bg);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            text-decoration: none;
+            color: var(--text);
+        }
+
+        .ty-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 6px 6px 0 var(--shadow-color);
+        }
+
+        .ty-card-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-bottom: 2px solid var(--border);
+        }
+
+        .ty-card-info {
+            padding: 1rem;
+            background: var(--card-bg);
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .ty-card-name {
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .ty-card-position {
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            padding: 0.35rem 0.75rem;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 100px;
+            box-shadow: 3px 3px 0 var(--shadow-color);
+            color: var(--text);
+            margin-top: 1rem;
+            align-self: flex-start;
+            margin-left: -0.75rem;
+            transition: all 0.2s ease;
+        }
+
+        .ty-card-position:hover {
+            transform: translate(-1px, -1px);
+            box-shadow: 4px 4px 0 var(--shadow-color);
+        }
+
+        /* Tags */
+        .tag-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .tag {
+            font-size: 0.75rem;
+            padding: 0.25rem 0.6rem;
+            border-radius: 50px;
+            background: var(--card-hover);
+            color: var(--text);
+            border: 1px solid var(--border);
+            text-transform: capitalize;
+        }
+
+        /* View Toggle */
+        .view-toggle {
+            display: none;
+            /* Hidden by default */
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            justify-content: flex-end;
+        }
+
+        .view-toggle.visible {
+            display: flex;
+        }
+
+        .view-btn {
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--gray);
+            padding: 0.4rem 0.8rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .view-btn:hover {
+            border-color: var(--gray);
+            color: var(--text);
+        }
+
+        .view-btn.active {
+            background: var(--text);
+            color: var(--bg);
+            border-color: var(--text);
+        }
+
+
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            animation: fadeInUp 0.5s ease-out forwards;
         }
 
         /* Footer */
@@ -370,9 +633,14 @@
                 flex-wrap: wrap;
                 gap: 1rem;
             }
+
+            .ty-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            }
         }
     </style>
 </head>
+
 <body>
     <div class="container">
         <header>
@@ -387,17 +655,31 @@
         </header>
 
         <nav class="filter-nav">
-            <button class="filter-btn active" onclick="filterList('all')">All</button>
-            <button class="filter-btn" onclick="filterList('sy')">SY</button>
-            <button class="filter-btn" onclick="filterList('ty')">TY</button>
-            <button class="filter-btn" onclick="filterList('final-year')">Final Year</button>
-            <button class="filter-btn" onclick="filterList('alumni')">Alumni</button>
+            <button class="filter-btn ty active" onclick="filterList('ty')">TY</button>
+            <button class="filter-btn sy" onclick="filterList('sy')">SY</button>
+            <!-- <button class="filter-btn final-year" onclick="filterList('final-year')">Final Year</button> -->
+
+
         </nav>
+
+        <div class="view-toggle" id="ty-view-toggle">
+            <button class="view-btn active" id="btn-grid" onclick="toggleView('grid')" aria-label="Grid View">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M10 4H4v6h6V4zm10 0h-6v6h6V4zM10 14H4v6h6v-6zm10 0h-6v6h6v-6z" />
+                </svg>
+            </button>
+            <button class="view-btn" id="btn-list" onclick="toggleView('list')" aria-label="List View">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                    <path
+                        d="M4 10.5c-.83 0-1.5.67-1.5 1.5s.67 1.5 1.5 1.5 1.5-.67 1.5-1.5-.67-1.5-1.5-1.5zm0-6c-.83 0-1.5.67-1.5 1.5S3.17 7.5 4 7.5 5.5 6.83 5.5 6 4.83 4.5 4 4.5zm0 12c-.83 0-1.5.67-1.5 1.5s.67 1.5 1.5 1.5 1.5-.67 1.5-1.5-.67-1.5-1.5-1.5zM7 19h14v-2H7v2zm0-6h14v-2H7v2zm0-8v2h14V5H7z" />
+                </svg>
+            </button>
+        </div>
 
         <section>
             <p class="section-title">Members</p>
-            <div class="grid" id="members-grid">
-                <!-- Members will be loaded from JSON -->
+            <div id="members-container">
+                <!-- Grid will be injected here -->
             </div>
         </section>
 
@@ -412,26 +694,36 @@
         </footer>
     </div>
 
+    <!-- Modal -->
+    <div class="modal-overlay" id="member-modal" onclick="closeMemberModal(event)">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeMemberModal(event)">×</button>
+            <div id="modal-body">
+                <!-- Content injected via JS -->
+            </div>
+        </div>
+    </div>
+
     <script>
         // Theme Toggle
         function toggleTheme() {
             const html = document.documentElement;
             const currentTheme = html.getAttribute('data-theme');
             const newTheme = currentTheme === 'dark' ? '' : 'dark';
-            
+
             if (newTheme) {
                 html.setAttribute('data-theme', newTheme);
             } else {
                 html.removeAttribute('data-theme');
             }
             localStorage.setItem('theme', newTheme);
-            
+
             const icon = document.getElementById('theme-icon');
             icon.textContent = newTheme === 'dark' ? '☀' : '☾';
         }
 
         // Load saved theme
-        (function() {
+        (function () {
             const savedTheme = localStorage.getItem('theme');
             if (savedTheme === 'dark') {
                 document.documentElement.setAttribute('data-theme', 'dark');
@@ -444,204 +736,381 @@
 
         const members = [
             {
+                "name": "Ansh Semwal",
+                "url": "https://de-funkd.github.io/",
+                "display_url": "de-funkd.github.io",
+                "year": "ty",
+                "image": "assets/AnshS.jpeg",
+                "description": "Reinforcement Learning, Intelligent Systems",
+                "position": "General Secretary"
+            },
+            {
                 "name": "ksagar",
-                "url": "https://ksagar.site",
+                "url": "https://ksagar.site/",
                 "display_url": "ksagar.site",
-                "year" : "ty"
+                "year": "ty",
+                "image": "assets/ksagar.jpg",
+                "description": "Intelligent Systems",
+                "position": "Joint General Secretary"
+            },
+            {
+                "name": "Varun Nigudkar",
+                "url": "https://www.linkedin.com/in/varun-nigudkar-vjti/",
+                "display_url": "varun-nigudkar-vjti",
+                "year": "ty",
+                "image": "assets/VarunN.jpeg",
+                "description": "CAD, ROS",
+                "position": "Joint General Secretary"
+            },
+            {
+                "name": "Shaunak Datar",
+                "url": "https://shaunakkdatar.github.io/",
+                "display_url": "shaunakkdatar.github.io",
+                "year": "ty",
+                "image": "assets/ShaunakD.jpeg",
+                "description": "RTEMS, Operating Systems, Kernel Development",
+                "position": "Electronics Head"
+            },
+            {
+                "name": "Vishal Mutha",
+                "url": "https://github.com/Vishal-Mutha",
+                "display_url": "github.com/Vishal-Mutha",
+                "year": "ty",
+                "image": "assets/VishalM.jpeg",
+                "description": "Embedded Systems, Robotics, ROS",
+                "position": "Electronics Head"
             },
             {
                 "name": "Shri Vishakh",
                 "url": "https://5iri.me",
                 "display_url": "5iri.me",
-                "year":"ty"
+                "year": "ty",
+                "image": "assets/Siri.jpeg",
+                "description": "Comp Arch, FPGA, Hardware acceleration",
+                "position": "Sponsorship Head"
             },
             {
                 "name": "Prajwal Avhad",
                 "url": "https://crisiumnih.github.io",
                 "display_url": "crisiumnih.github.io",
-                "year":"ty"
+                "year": "ty",
+                "image": "assets/Prajwal.jpeg",
+                "description": "Humanoids, Trajectory optimization, Compilers, Reinforcement Learning, Julia",
+                "position": "Sponsorship Head"
+            },
+
+            {
+                "name": "Sujal Dwivedi",
+                "url": "https://5usu.github.io/",
+                "display_url": "5usu.github.io",
+                "year": "ty",
+                "image": "assets/SujalD.jpeg",
+                "description": "World Models, FPGA, ML, Quantization",
+                "position": "Software Head"
+            },
+            {
+                "name": "Aaditya Joil",
+                "url": "https://github.com/JaytidaA",
+                "display_url": "JaytidaA.github.io",
+                "year": "ty",
+                "image": "assets/Jojo.jpeg",
+                "description": "Embedded, OS, Graphics",
+                "position": "Software Head"
+            },
+            {
+                "name": "Kartikeya Pathak",
+                "url": "https://noobmaster-version.github.io/spongefal/index.html",
+                "display_url": "kartikey-pathak",
+                "year": "ty",
+                "image": "assets/KartikeyP.jpeg",
+                "description": "Embedded Systems, ROS, CAD",
+                "position": "Mechanical Head"
+            },
+            {
+                "name": "Harsh Sagare",
+                "url": "https://www.linkedin.com/in/harsh-sagare-8aa005293/",
+                "display_url": "harsh-sagare",
+                "year": "ty",
+                "image": "assets/HarshS.jpeg",
+                "description": "Mechanical Designing, ROS, Controls & System",
+                "position": "Mechanical Head"
+            },
+            {
+                "name": "Ameya Tikhe",
+                "url": "https://aged-mind-c51.notion.site/Hi-I-am-Ameya-Tikhe-1b27d6a4665e80db8954f10a4a0f5f2d",
+                "display_url": "ameya-tikhe",
+                "year": "ty",
+                "image": "assets/AmeyaT.jpeg",
+                "description": "CAD, Graphic Design, Advertising",
+                "position": "Design Lead"
+            },
+            {
+                "name": "Suchit Garad",
+                "url": "https://ilegend509.me/",
+                "display_url": "ilegend509.me",
+                "year": "ty",
+                "image": "assets/SuchitG.jpeg",
+                "description": "FPGA, Digital Signal Processing, Digital Design",
+                "position": "Marketing Head"
+            },
+            {
+                "name": "Shaurya Rane",
+                "url": "https://www.linkedin.com/in/shaurya-rane-b22882283/",
+                "display_url": "shaurya-rane",
+                "year": "ty",
+                "image": "assets/ShauryaR.jpeg",
+                "description": "Embedded systems , OS, Kernel Dev , Electronics",
+                "position": "TY core"
+            },
+            // {
+            //     "name": "Rohan Mithari",
+            //     "url": "",
+            //     "display_url": " ",
+            //     "year": "ty",
+            //     "image": "assets/advait.png",
+            //     "description": " ",
+            //     "position": "TY core"
+            // }, 
+            {
+                "name": "Advait Desai",
+                "url": "https://advait2211.github.io/",
+                "display_url": "advait2211.github.io/",
+                "year": "ty",
+                "image": "assets/advait.png",
+                "description": "Reinforcement learning, AI/ML",
+                "position": "TY core"
             },
             {
                 "name": "Sarayu Anantharaman",
                 "url": "https://sarayusapa.github.io",
                 "display_url": "sarayusapa.github.io",
-                "year":"sy"
+                "year": "sy"
             },
             {
                 "name": "Mehul Totala",
                 "url": "https://coffeempty.github.io/portfolio",
                 "display_url": "coffeempty.github.io",
-                "year":"sy"
+                "year": "sy"
             },
             {
                 "name": "Ved Jain",
                 "url": "https://vedjain773.github.io",
                 "display_url": "vedjain773.github.io",
-                "year":"sy"
+                "year": "sy"
             },
             {
                 "name": "Tirth Gada",
                 "url": "https://dimios45.github.io",
                 "display_url": "dimios45.github.io",
-                "year":"sy"
+                "year": "sy"
             },
             {
                 "name": "Gargi Gupta",
                 "url": "https://gg21-prog.github.io/",
                 "display_url": "gg21-prog.github.io",
-                "year":"sy"
+                "year": "sy"
             },
             {
                 "name": "mustafa",
                 "url": "https://mt-tass.github.io",
                 "display_url": "mt-tass.github.io",
-                "year":"sy"
+                "year": "sy"
             },
             {
                 "name": "Dhruv Gowda",
                 "url": "https://kernelknight33.github.io/",
                 "display_url": "kernelknight33.github.io",
-                "year":"sy"
+                "year": "sy"
             },
-                
-            {
-                "name": "Zain",
-                "url": "https://zainsv.me/",
-                "display_url": "zainsv.me",
-                "year":"alumni"
-            },
+
+
             {
                 "name": "Bhakti Assar",
                 "url": "https://bhakti-a.github.io/",
                 "display_url": "bhakti-a.github.io",
-                "year":"sy"
+                "year": "sy"
             },
             {
                 "name": "Archit More",
                 "url": "https://avm1234567.github.io/",
                 "display_url": "avm1234567.github.io",
-                "year":"sy"
+                "year": "sy"
             },
             {
                 "name": "Vrushtee",
                 "url": "https://vruga.site",
                 "display_url": "vruga.site",
-                "year":"sy"
+                "year": "sy"
             },
             {
                 "name": "Shashvat",
                 "url": "https://spr4bhu.github.io",
                 "display_url": "spr4bhu.github.io",
-                "year":"sy"
+                "year": "sy"
             },
             {
                 "name": "Harshit Bhalani",
                 "url": "https://harshit6-b.github.io/",
                 "display_url": "harshit6-b.github.io",
-                "year":"sy"
+                "year": "sy"
             },
             {
                 "name": "Aryan Vyapari",
                 "url": "https://4rynv.github.io/",
                 "display_url": "4rynv.github.io",
-                "year":"sy"
+                "year": "sy"
             },
             {
                 "name": "Varun Patil",
                 "url": "https://varunapatil.github.io/",
                 "display_url": "varunapatil.io",
-                "year":"sy"
+                "year": "sy"
             },
             {
                 "name": "Lakshya Lalwani",
                 "url": "https://lakshyaa1.github.io/",
                 "display_url": "lakshyaa1.github.io",
-                "year":"sy"
+                "year": "sy"
             },
             {
                 "name": "Sahil Apage",
                 "url": "https://sahilapage.github.io/",
                 "display_url": "sahilapage.github.io",
-                "year":"sy"
+                "year": "sy"
             },
             {
                 "name": "Arhan Chavare",
                 "url": "https://badboy1606.github.io/",
                 "display_url": "badboy1606.github.io",
-                "year":"sy"
+                "year": "sy"
             },
-            { 
-                "name" : "abhijeet bhalerao",
-                "url" : "https://abhixb.github.io/",
-                "display_url" : "abhixb.github.io",
-                "year":"sy"
- 
+            {
+                "name": "abhijeet bhalerao",
+                "url": "https://abhixb.github.io/",
+                "display_url": "abhixb.github.io",
+                "year": "sy"
+
             },
             {
                 "name": "Rishiraj Rajgor",
                 "url": "https://dark-knightshanks.github.io/",
                 "display_url": "dark-knightshanks.github.io",
-                "year":"sy"
-            }, 
-            {
-                "name": "Advait Desai",
-                "url": "https://advait2211.github.io/",
-                "display_url": "advait2211.github.io/",
-                "year":"ty"
+                "year": "sy"
             },
+
             {
                 "name": "Vedant Malkar",
                 "url": "https://vedantmalkar.github.io/",
                 "display_url": "vedantmalkar.github.io",
-                "year":"sy"
+                "year": "sy"
             },
             {
                 "name": "Ashutosh Yadav",
                 "url": "https://d4ggr.github.io/",
                 "display_url": "d4ggr.github.io",
-                "year":"sy"
+                "year": "sy"
             },
             {
                 "name": "Sarvaarth Narang",
                 "url": "https://sarvaarthn.github.io/",
                 "display_url": "sarvaarthn.github.io",
-                "year":"sy"
+                "year": "sy"
             }
         ];
 
+        const alumni = [];
+
+        let currentView = 'grid'; // 'grid' or 'list'
+        let currentFilter = 'ty'; // Start with TY
+
         function loadMembers() {
-            renderMembers('all');
+            renderMembers('ty');
         }
-        function renderMembers(filter = 'all') {
-            const grid = document.getElementById('members-grid');
-            grid.innerHTML = '';
-            
+
+        function toggleView(view) {
+            currentView = view;
+
+            // Update UI buttons
+            document.getElementById('btn-grid').classList.toggle('active', view === 'grid');
+            document.getElementById('btn-list').classList.toggle('active', view === 'list');
+
+            renderMembers(currentFilter);
+        }
+
+
+
+        function renderMembers(filter = 'ty') {
+            currentFilter = filter;
+            const container = document.getElementById('members-container');
+            const viewToggle = document.getElementById('ty-view-toggle');
+
+            // Show/Hide Toggle
+            if (filter === 'ty') {
+                viewToggle.classList.add('visible');
+            } else {
+                viewToggle.classList.remove('visible');
+            }
+
+            // Trigger Fade Animation
+            container.classList.remove('fade-in');
+            void container.offsetWidth; // trigger reflow
+            container.classList.add('fade-in');
+
+            container.innerHTML = '';
+
+
+
+            // Determine Layout
+            let layoutClass = 'grid';
+            if (filter === 'ty' && currentView === 'grid') {
+                layoutClass = 'ty-grid';
+            }
+            container.className = `${layoutClass} fade-in`;
+
             const filtered = filter === 'all' ? members : members.filter(m => m.year === filter);
-            
+
             filtered.forEach(member => {
-                const card = document.createElement('a');
-                card.href = member.url;
-                card.target = '_blank';
-                card.rel = 'noopener';
-                card.className = 'card';
-                
-                // Add year class if member has year property
-                if (member.year) {
-                    card.classList.add(member.year);
-                }
-                
-                card.innerHTML = `
-                    <div>
-                        <div class="card-name">${member.name}</div>
-                        <div class="card-url">
-                            ${member.display_url}
-                            ${member.year ? `<span class="year-badge">${member.year.replace('-', ' ')}</span>` : ''}
+                let card;
+
+                // Check if we should render TY Card Style
+                if (filter === 'ty' && currentView === 'grid') {
+                    // Render TY Card (Image Grid)
+                    card = document.createElement('div');
+                    card.className = 'ty-card';
+                    card.onclick = () => openMemberModal(member);
+                    const imgUrl = member.image ? member.image : 'assets/download.jpeg';
+
+                    card.innerHTML = `
+                        <img src="${imgUrl}" alt="${member.name}" class="ty-card-img">
+                        <div class="ty-card-info">
+                            <div class="ty-card-name">${member.name}</div>
+                            ${member.position ? `<div class="ty-card-position">${member.position}</div>` : ''}
                         </div>
-                    </div>
-                    <span class="card-arrow">↗</span>
-                `;
-                
-                grid.appendChild(card);
+                    `;
+                } else {
+                    // Render Standard Card
+                    card = document.createElement('a');
+                    card.href = member.url;
+                    card.target = '_blank';
+                    card.rel = 'noopener';
+                    card.className = 'card';
+
+                    if (member.year) {
+                        card.classList.add(member.year);
+                    }
+
+                    card.innerHTML = `
+                        <div>
+                            <div class="card-name">${member.name}</div>
+                            <div class="card-url">
+                                ${member.display_url}
+                            </div>
+                        </div>
+                        <span class="card-arrow">↗</span>
+                    `;
+                }
+
+                container.appendChild(card);
             });
         }
 
@@ -650,8 +1119,57 @@
             event.target.classList.add('active');
             renderMembers(year);
         }
-        
+
+        /* Modal Logic */
+        /* Modal Logic */
+        function openMemberModal(member) {
+            const modal = document.getElementById('member-modal');
+            const body = document.getElementById('modal-body');
+            const imgUrl = member.image ? member.image : 'assets/download.jpeg';
+
+            // Generate Tags
+            let tagsHtml = '';
+            if (member.description) {
+                const tags = member.description.split(',').map(tag => tag.trim()).filter(tag => tag.length > 0);
+                if (tags.length > 0) {
+                    tagsHtml = `<div class="tag-container">
+                        ${tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+                     </div>`;
+                } else {
+                    tagsHtml = `<div class="modal-desc">${member.description}</div>`;
+                }
+            } else {
+                tagsHtml = '<div class="modal-desc">No description available yet.</div>';
+            }
+
+            body.innerHTML = `
+                <img src="${imgUrl}" alt="${member.name}" class="modal-image">
+                <div class="modal-name">${member.name}</div>
+                ${tagsHtml}
+                <div class="modal-links">
+                     <a href="${member.url}" target="_blank" rel="noopener" class="card-url">${member.display_url} ↗</a>
+                </div>
+            `;
+
+            modal.classList.add('active');
+        }
+
+        function closeMemberModal(e) {
+            // Close if clicked on overlay or close button
+            if (e.target.classList.contains('modal-overlay') || e.target.classList.contains('modal-close') || e.key === 'Escape') {
+                document.getElementById('member-modal').classList.remove('active');
+            }
+        }
+
+        // Close on Escape key
+        document.addEventListener('keydown', function (event) {
+            if (event.key === "Escape") {
+                document.getElementById('member-modal').classList.remove('active');
+            }
+        });
+
         loadMembers();
     </script>
 </body>
+
 </html>
