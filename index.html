@@ -167,10 +167,10 @@
             color: rgb(56, 140, 56);
         }
 
-        .filter-btn.sy.active {
-            background: rgba(180, 40, 60, 0.1);
-            border-color: rgb(180, 40, 60);
-            color: rgb(180, 40, 60);
+        .filter-btn.ly.active {
+            background: rgba(89, 46, 131, 0.1);
+            border-color: rgb(89, 46, 131);
+            color: rgb(89, 46, 131);
         }
 
         .filter-btn.final-year.active {
@@ -192,366 +192,108 @@
             color: var(--gray);
         }
 
-        /* Grid */
-        .grid {
-            border: 2px solid var(--border);
-        }
-
-        /* Card */
-        .card {
-            position: relative;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 1.25rem;
-            text-decoration: none;
-            color: inherit;
-            border-bottom: 1px solid var(--border);
-            background: var(--card-bg);
-            overflow: hidden;
-            transition: background 0.15s ease;
-        }
-
-        .card:last-child {
-            border-bottom: none;
-        }
-
-        .card::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 60%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent 0%, var(--year-color) 80%);
-            opacity: 0;
-            transition: opacity 0.3s, width 0.3s;
-            pointer-events: none;
-        }
-
-        .card:hover::after {
-            opacity: 1;
-            width: 70%;
-        }
-
-        .card:hover {
-            background: var(--card-hover);
-        }
-
-        .card-name {
-            font-size: 1rem;
-            font-weight: 600;
-            position: relative;
-            z-index: 2;
-            transition: all 0.2s;
-        }
-
-        .card:hover .card-name {
-            font-weight: 700;
-            letter-spacing: -0.01em;
-        }
-
-        .card-url {
-            font-size: 0.8125rem;
-            color: var(--gray);
-            position: relative;
-            z-index: 2;
-        }
-
-        .year-badge {
-            display: inline-block;
-            padding: 0.2rem 0.4rem;
-            border-radius: 3px;
-            font-size: 0.65rem;
-            font-weight: 500;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            margin-left: 0.5rem;
-            border: 1px solid;
-            background: transparent;
-            transition: all 0.2s;
-        }
-
-        .sy .year-badge {
-            border-color: rgba(180, 40, 60, 0.5);
-            color: rgba(180, 40, 60, 0.8);
-        }
-
-        .ty .year-badge {
-            border-color: rgba(56, 140, 56, 0.5);
-            color: rgba(56, 140, 56, 0.8);
-        }
-
-        .final-year .year-badge {
-            border-color: rgba(89, 46, 131, 0.5);
-            color: rgba(89, 46, 131, 0.8);
-        }
-
-
-
-        .card:hover .sy .year-badge,
-        .sy.card:hover .year-badge {
-            background: rgb(180, 40, 60);
-            border-color: rgb(180, 40, 60);
-            color: white;
-        }
-
-        .card:hover .ty .year-badge,
-        .ty.card:hover .year-badge {
-            background: rgb(56, 140, 56);
-            border-color: rgb(56, 140, 56);
-            color: white;
-        }
-
-        .card:hover .final-year .year-badge,
-        .final-year.card:hover .year-badge {
-            background: rgb(89, 46, 131);
-            border-color: rgb(89, 46, 131);
-            color: white;
-        }
-
-
-
-        .sy {
-            --year-color: var(--color-sy);
-        }
-
-        .ty {
-            --year-color: var(--color-ty);
-        }
-
-        .final-year {
-            --year-color: var(--color-final);
-        }
-
-
-
-        .card-arrow {
-            font-size: 1.25rem;
-            opacity: 0.3;
-            transition: all 0.15s ease;
-            position: relative;
-            z-index: 2;
-        }
-
-        .card:hover .card-arrow {
-            opacity: 1;
-            transform: translate(2px, -2px);
-        }
-
-        /* Modal */
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(5px);
-        }
-
-        .modal-overlay.active {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .modal-content {
-            background: var(--bg);
-            border: 2px solid var(--border);
-            padding: 2rem;
-            max-width: 500px;
-            width: 90%;
-            position: relative;
-            transform: scale(0.9);
-            transition: all 0.3s ease;
-            max-height: 90vh;
-            overflow-y: auto;
-        }
-
-        .modal-overlay.active .modal-content {
-            transform: scale(1);
-        }
-
-        .modal-close {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            background: transparent;
-            border: none;
-            color: var(--text);
-            font-size: 1.5rem;
-            cursor: pointer;
-            width: 30px;
-            height: 30px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            border: 1px solid transparent;
-            transition: all 0.2s;
-        }
-
-        .modal-close:hover {
-            border-color: var(--border);
-            background: var(--card-hover);
-        }
-
-        .modal-image {
-            width: 100%;
-            height: auto;
-            max-height: 60vh;
-            object-fit: contain;
-            background: var(--card-hover);
-            border: 2px solid var(--border);
-            margin-bottom: 1.5rem;
-        }
-
-        .modal-name {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-        }
-
-        .modal-links {
-            margin-top: 1.5rem;
-        }
-
-        .modal-desc {
-            line-height: 1.6;
-            color: var(--gray);
-        }
-
-        /* TY Grid Layout */
-        .ty-grid {
+        .ly-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 1.5rem;
+            grid-template-columns: repeat(auto-fill, minmax(235px, 1fr));
+            gap: 1rem;
             padding: 1rem 0;
         }
 
-        .ty-card {
+        .ly-card {
+            position: relative;
             border: 2px solid var(--border);
             background: var(--card-bg);
-            cursor: pointer;
-            transition: all 0.3s ease;
-            overflow: hidden;
+            padding: 1.1rem 1.15rem 1.15rem;
             display: flex;
             flex-direction: column;
+            gap: 0.55rem;
+            min-height: 175px;
             text-decoration: none;
             color: var(--text);
+            transition: all 0.25s ease;
+            overflow: hidden;
         }
 
-        .ty-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 6px 6px 0 var(--shadow-color);
-        }
-
-        .ty-card-img {
+        .ly-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
-            height: 200px;
-            object-fit: cover;
-            border-bottom: 2px solid var(--border);
+            height: 8px;
+            background: var(--accent);
         }
 
-        .ty-card-info {
-            padding: 1rem;
-            background: var(--card-bg);
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
+        .ly-card::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: var(--accent);
+            opacity: 0;
+            transition: opacity 0.25s ease;
+            pointer-events: none;
         }
 
-        .ty-card-name {
+        .ly-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 5px 5px 0 var(--accent);
+        }
+
+        .ly-card:hover::after {
+            opacity: 0.07;
+        }
+
+        [data-theme="dark"] .ly-card {
+            border-color: #262626;
+            background: #131313;
+        }
+
+        .ly-card-name {
             font-weight: 700;
-            font-size: 1.1rem;
-            margin-bottom: 0.25rem;
+            font-size: 1.05rem;
+            line-height: 1.2;
+            margin-top: 0.35rem;
         }
 
-        .ty-card-position {
-            font-size: 0.7rem;
+        .ly-card-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.35rem;
+        }
+
+        .ly-tag {
+            font-size: 0.68rem;
+            padding: 0.2rem 0.55rem;
+            border-radius: 50px;
+            border: 1px solid var(--accent);
+            color: var(--text);
+            background: transparent;
+        }
+
+        [data-theme="dark"] .ly-tag {
+            border-color: #333;
+            color: var(--gray);
+        }
+
+        .ly-card-pos {
+            font-size: 0.58rem;
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 0.05em;
-            padding: 0.35rem 0.75rem;
-            background: var(--bg);
-            border: 1px solid var(--border);
-            border-radius: 100px;
-            box-shadow: 3px 3px 0 var(--shadow-color);
-            color: var(--text);
-            margin-top: 1rem;
-            align-self: flex-start;
-            margin-left: -0.75rem;
-            transition: all 0.2s ease;
-        }
-
-        .ty-card-position:hover {
-            transform: translate(-1px, -1px);
-            box-shadow: 4px 4px 0 var(--shadow-color);
-        }
-
-        /* Tags */
-        .tag-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .tag {
-            font-size: 0.75rem;
-            padding: 0.25rem 0.6rem;
-            border-radius: 50px;
-            background: var(--card-hover);
-            color: var(--text);
-            border: 1px solid var(--border);
-            text-transform: capitalize;
-        }
-
-        /* View Toggle */
-        .view-toggle {
-            display: none;
-            /* Hidden by default */
-            gap: 0.5rem;
-            margin-bottom: 1rem;
-            justify-content: flex-end;
-        }
-
-        .view-toggle.visible {
-            display: flex;
-        }
-
-        .view-btn {
-            background: transparent;
-            border: 1px solid var(--border);
             color: var(--gray);
-            padding: 0.4rem 0.8rem;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 0.8rem;
-            transition: all 0.2s;
-            display: flex;
-            align-items: center;
-            gap: 0.4rem;
+            margin-top: auto;
+            padding-top: 0.7rem;
         }
 
-        .view-btn:hover {
-            border-color: var(--gray);
-            color: var(--text);
+        .no-link {
+            cursor: default;
+            opacity: 0.55;
         }
 
-        .view-btn.active {
-            background: var(--text);
-            color: var(--bg);
-            border-color: var(--text);
+        .no-link:hover {
+            transform: none;
+            box-shadow: none;
         }
-
 
 
         /* Animations */
@@ -634,8 +376,8 @@
                 gap: 1rem;
             }
 
-            .ty-grid {
-                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            .ly-grid {
+                grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
             }
         }
     </style>
@@ -655,26 +397,9 @@
         </header>
 
         <nav class="filter-nav">
-            <button class="filter-btn ty active" onclick="filterList('ty')">TY</button>
-            <button class="filter-btn sy" onclick="filterList('sy')">SY</button>
-            <!-- <button class="filter-btn final-year" onclick="filterList('final-year')">Final Year</button> -->
-
-
+            <button class="filter-btn ty active" data-year="ty" onclick="filterList('ty')">TY</button>
+            <button class="filter-btn ly" data-year="ly" onclick="filterList('ly')">LY</button>
         </nav>
-
-        <div class="view-toggle" id="ty-view-toggle">
-            <button class="view-btn active" id="btn-grid" onclick="toggleView('grid')" aria-label="Grid View">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M10 4H4v6h6V4zm10 0h-6v6h6V4zM10 14H4v6h6v-6zm10 0h-6v6h6v-6z" />
-                </svg>
-            </button>
-            <button class="view-btn" id="btn-list" onclick="toggleView('list')" aria-label="List View">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                    <path
-                        d="M4 10.5c-.83 0-1.5.67-1.5 1.5s.67 1.5 1.5 1.5 1.5-.67 1.5-1.5-.67-1.5-1.5-1.5zm0-6c-.83 0-1.5.67-1.5 1.5S3.17 7.5 4 7.5 5.5 6.83 5.5 6 4.83 4.5 4 4.5zm0 12c-.83 0-1.5.67-1.5 1.5s.67 1.5 1.5 1.5 1.5-.67 1.5-1.5-.67-1.5-1.5-1.5zM7 19h14v-2H7v2zm0-6h14v-2H7v2zm0-8v2h14V5H7z" />
-                </svg>
-            </button>
-        </div>
 
         <section>
             <p class="section-title">Members</p>
@@ -692,16 +417,6 @@
             </div>
             <p class="footer-copy">Est. 2008 / Mumbai</p>
         </footer>
-    </div>
-
-    <!-- Modal -->
-    <div class="modal-overlay" id="member-modal" onclick="closeMemberModal(event)">
-        <div class="modal-content">
-            <button class="modal-close" onclick="closeMemberModal(event)">×</button>
-            <div id="modal-body">
-                <!-- Content injected via JS -->
-            </div>
-        </div>
     </div>
 
     <script>
@@ -734,439 +449,464 @@
             }
         })();
 
+        const SHEET_ID = '1496o5qlTT6BNEyps08rZdNUiCzFrpyQH_oVcfJHtaYg';
+        const TY_GID = '0';
+        const LY_GID = '1525488612';
+
+        function sheetUrl(gid) {
+            return `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv&gid=${gid}`;
+        }
+
+        const DOMAINS = [
+            ['AI & Learning', '#9B6DFF', ['reinforcement', ' rl', 'rl,', 'llm', 'robot learning', 'intelligent', 'world model', 'edgeai', 'ai/ml', ' ai,', ' ml', 'ml,', 'quantization', 'machine learning', 'deep learning', 'neural', 'computer vision', 'diffusion', 'transformer']],
+            ['Embedded & OS', '#F29441', ['embedded', 'operating system', 'kernel', 'rtems', 'zephyr', 'microcontroller', 'low level', 'compiler', 'julia', 'graphics']],
+            ['Silicon & Arch', '#25B79B', ['fpga', 'comp arch', 'computer architecture', 'semiconductor', 'digital signal', 'digital design', 'hardware acceleration', 'verilog', 'asic', 'vlsi', 'risc']],
+            ['Robotics', '#3D8BFF', ['robotics', 'ros', 'humanoid', 'trajectory', 'controls', 'automation']],
+            ['Electronics & PCB', '#E8566B', ['electronics', 'pcb', 'kicad', 'communication', 'wireless', 'localization', 'product design', 'signal', 'rf', 'analog', 'sensor']],
+            ['Mech & Design', '#78A93A', ['cad', 'mechanical', 'graphic design', 'advertising']]
+        ];
+
+        const FALLBACK_COLOR = '#8A8A8A';
+
         const members = [
             {
-                "name": "Ansh Semwal",
-                "url": "https://de-funkd.github.io/",
-                "display_url": "de-funkd.github.io",
+                "name": "Vrusthee Gaikwad",
+                "url": "https://vruga.site",
+                "display_url": "vruga.site",
                 "year": "ty",
-                "image": "assets/AnshS.jpeg",
-                "description": "Reinforcement Learning, Intelligent Systems",
+                "description": "Robotics, Foundational models",
                 "position": "General Secretary"
             },
             {
-                "name": "ksagar",
-                "url": "https://ksagar.site/",
-                "display_url": "ksagar.site",
-                "year": "ty",
-                "image": "assets/ksagar.jpg",
-                "description": "Intelligent Systems",
-                "position": "Joint General Secretary"
-            },
-            {
-                "name": "Varun Nigudkar",
-                "url": "https://www.linkedin.com/in/varun-nigudkar-vjti/",
-                "display_url": "varun-nigudkar-vjti",
-                "year": "ty",
-                "image": "assets/VarunN.jpeg",
-                "description": "CAD, ROS",
-                "position": "Joint General Secretary"
-            },
-            {
-                "name": "Shaunak Datar",
-                "url": "https://shaunakkdatar.github.io/",
-                "display_url": "shaunakkdatar.github.io",
-                "year": "ty",
-                "image": "assets/ShaunakD.jpeg",
-                "description": "RTEMS, Operating Systems, Kernel Development",
-                "position": "Electronics Head"
-            },
-            {
-                "name": "Vishal Mutha",
-                "url": "https://github.com/Vishal-Mutha",
-                "display_url": "github.com/Vishal-Mutha",
-                "year": "ty",
-                "image": "assets/VishalM.jpeg",
-                "description": "Embedded Systems, Robotics, ROS",
-                "position": "Electronics Head"
-            },
-            {
-                "name": "Shri Vishakh",
-                "url": "https://5iri.me",
-                "display_url": "5iri.me",
-                "year": "ty",
-                "image": "assets/Siri.jpeg",
-                "description": "Comp Arch, FPGA, Hardware acceleration",
-                "position": "Sponsorship Head"
-            },
-            {
-                "name": "Prajwal Avhad",
-                "url": "https://crisiumnih.github.io",
-                "display_url": "crisiumnih.github.io",
-                "year": "ty",
-                "image": "assets/Prajwal.jpeg",
-                "description": "Humanoids, Trajectory optimization, Compilers, Reinforcement Learning, Julia",
-                "position": "Sponsorship Head"
-            },
-
-            {
-                "name": "Sujal Dwivedi",
-                "url": "https://5usu.github.io/",
-                "display_url": "5usu.github.io",
-                "year": "ty",
-                "image": "assets/SujalD.jpeg",
-                "description": "World Models, FPGA, ML, Quantization",
-                "position": "Software Head"
-            },
-            {
-                "name": "Aaditya Joil",
-                "url": "https://github.com/JaytidaA",
-                "display_url": "JaytidaA.github.io",
-                "year": "ty",
-                "image": "assets/Jojo.jpeg",
-                "description": "Embedded, OS, Graphics",
-                "position": "Software Head"
-            },
-            {
-                "name": "Kartikeya Pathak",
-                "url": "https://noobmaster-version.github.io/spongefal/index.html",
-                "display_url": "kartikey-pathak",
-                "year": "ty",
-                "image": "assets/KartikeyP.jpeg",
-                "description": "Embedded Systems, ROS, CAD",
-                "position": "Mechanical Head"
-            },
-            {
-                "name": "Harsh Sagare",
-                "url": "https://www.linkedin.com/in/harsh-sagare-8aa005293/",
-                "display_url": "harsh-sagare",
-                "year": "ty",
-                "image": "assets/HarshS.jpeg",
-                "description": "Mechanical Designing, ROS, Controls & System",
-                "position": "Mechanical Head"
-            },
-            {
-                "name": "Ameya Tikhe",
-                "url": "https://aged-mind-c51.notion.site/Hi-I-am-Ameya-Tikhe-1b27d6a4665e80db8954f10a4a0f5f2d",
-                "display_url": "ameya-tikhe",
-                "year": "ty",
-                "image": "assets/AmeyaT.jpeg",
-                "description": "CAD, Graphic Design, Advertising",
-                "position": "Design Lead"
-            },
-            {
-                "name": "Suchit Garad",
-                "url": "https://ilegend509.me/",
-                "display_url": "ilegend509.me",
-                "year": "ty",
-                "image": "assets/SuchitG.jpeg",
-                "description": "FPGA, Digital Signal Processing, Digital Design",
-                "position": "Marketing Head"
-            },
-            {
-                "name": "Shaurya Rane",
-                "url": "https://www.linkedin.com/in/shaurya-rane-b22882283/",
-                "display_url": "shaurya-rane",
-                "year": "ty",
-                "image": "assets/ShauryaR.jpeg",
-                "description": "Embedded systems , OS, Kernel Dev , Electronics",
-                "position": "TY core"
-            },
-            // {
-            //     "name": "Rohan Mithari",
-            //     "url": "",
-            //     "display_url": " ",
-            //     "year": "ty",
-            //     "image": "assets/advait.png",
-            //     "description": " ",
-            //     "position": "TY core"
-            // }, 
-            {
-                "name": "Advait Desai",
-                "url": "https://advait2211.github.io/",
-                "display_url": "advait2211.github.io/",
-                "year": "ty",
-                "image": "assets/advait.png",
-                "description": "Reinforcement learning, AI/ML",
-                "position": "TY core"
-            },
-            {
                 "name": "Sarayu Anantharaman",
-                "url": "https://sarayusapa.github.io",
+                "url": "https://sarayusapa.github.io/",
                 "display_url": "sarayusapa.github.io",
-                "year": "sy"
-            },
-            {
-                "name": "Mehul Totala",
-                "url": "https://coffeempty.github.io/portfolio",
-                "display_url": "coffeempty.github.io",
-                "year": "sy"
-            },
-            {
-                "name": "Ved Jain",
-                "url": "https://vedjain773.github.io",
-                "display_url": "vedjain773.github.io",
-                "year": "sy"
-            },
-            {
-                "name": "Tirth Gada",
-                "url": "https://dimios45.github.io",
-                "display_url": "dimios45.github.io",
-                "year": "sy"
-            },
-            {
-                "name": "Gargi Gupta",
-                "url": "https://gg21-prog.github.io/",
-                "display_url": "gg21-prog.github.io",
-                "year": "sy"
-            },
-            {
-                "name": "mustafa",
-                "url": "https://mt-tass.github.io",
-                "display_url": "mt-tass.github.io",
-                "year": "sy"
-            },
-            {
-                "name": "Dhruv Gowda",
-                "url": "https://kernelknight33.github.io/",
-                "display_url": "kernelknight33.github.io",
-                "year": "sy"
-            },
-
-
-            {
-                "name": "Bhakti Assar",
-                "url": "https://bhakti-a.github.io/",
-                "display_url": "bhakti-a.github.io",
-                "year": "sy"
-            },
-            {
-                "name": "Archit More",
-                "url": "https://avm1234567.github.io/",
-                "display_url": "avm1234567.github.io",
-                "year": "sy"
-            },
-            {
-                "name": "Vrushtee",
-                "url": "https://vruga.site",
-                "display_url": "vruga.site",
-                "year": "sy"
-            },
-            {
-                "name": "Shashvat",
-                "url": "https://spr4bhu.github.io",
-                "display_url": "spr4bhu.github.io",
-                "year": "sy"
-            },
-            {
-                "name": "Harshit Bhalani",
-                "url": "https://harshit6-b.github.io/",
-                "display_url": "harshit6-b.github.io",
-                "year": "sy"
-            },
-            {
-                "name": "Aryan Vyapari",
-                "url": "https://4rynv.github.io/",
-                "display_url": "4rynv.github.io",
-                "year": "sy"
-            },
-            {
-                "name": "Varun Patil",
-                "url": "https://varunapatil.github.io/",
-                "display_url": "varunapatil.io",
-                "year": "sy"
+                "year": "ty",
+                "description": "Intelligent Systems, Robotics",
+                "position": "Joint General Secretary"
             },
             {
                 "name": "Lakshya Lalwani",
                 "url": "https://lakshyaa1.github.io/",
                 "display_url": "lakshyaa1.github.io",
-                "year": "sy"
+                "year": "ty",
+                "description": "Communication Systems, Robotics",
+                "position": "Joint General Secretary"
             },
             {
-                "name": "Sahil Apage",
-                "url": "https://sahilapage.github.io/",
-                "display_url": "sahilapage.github.io",
-                "year": "sy"
+                "name": "Tirth Gada",
+                "url": "https://dimios45.github.io/",
+                "display_url": "dimios45.github.io",
+                "year": "ty",
+                "description": "Robot Learning",
+                "position": "Software Head"
             },
-            {
-                "name": "Arhan Chavare",
-                "url": "https://badboy1606.github.io/",
-                "display_url": "badboy1606.github.io",
-                "year": "sy"
-            },
-            {
-                "name": "abhijeet bhalerao",
-                "url": "https://abhixb.github.io/",
-                "display_url": "abhixb.github.io",
-                "year": "sy"
-
-            },
-            {
-                "name": "Rishiraj Rajgor",
-                "url": "https://dark-knightshanks.github.io/",
-                "display_url": "dark-knightshanks.github.io",
-                "year": "sy"
-            },
-
             {
                 "name": "Vedant Malkar",
-                "url": "https://vedantmalkar.github.io/",
+                "url": "https://vedantmalkar.github.io",
                 "display_url": "vedantmalkar.github.io",
-                "year": "sy"
+                "year": "ty",
+                "description": "Low Level Embedded, Operating Systems",
+                "position": "Software Head"
             },
             {
-                "name": "Ashutosh Yadav",
-                "url": "https://d4ggr.github.io/",
-                "display_url": "d4ggr.github.io",
-                "year": "sy"
+                "name": "Mustafa Taher",
+                "url": "https://mt-tass.github.io",
+                "display_url": "mt-tass.github.io",
+                "year": "ty",
+                "description": "Embedded, Electronics, EdgeAI",
+                "position": "Software Head"
             },
             {
                 "name": "Sarvaarth Narang",
                 "url": "https://sarvaarthn.github.io/",
                 "display_url": "sarvaarthn.github.io",
-                "year": "sy"
+                "year": "ty",
+                "description": "Electronics, Communication Systems",
+                "position": "Electronics Head"
+            },
+            {
+                "name": "Omkar Nanajkar",
+                "url": "https://github.com/nomkar24/nomkar24.github.io",
+                "display_url": "github.com/nomkar24/nomkar24.github.io",
+                "year": "ty",
+                "description": "Zephyr, Embedded, Kicad, Product Design",
+                "position": "Electronics Head"
+            },
+            {
+                "name": "Varun Patil",
+                "url": "https://github.com/VarunAPatil",
+                "display_url": "github.com/VarunAPatil",
+                "year": "ty",
+                "description": "Embedded Systems, PCB design, CAD",
+                "position": "Electronics Head"
+            },
+            {
+                "name": "Ashutosh Yadav",
+                "url": "https://d4ggr.github.io/",
+                "display_url": "d4ggr.github.io",
+                "year": "ty",
+                "description": "Mechanical Design, Embedded Systems",
+                "position": "Mechanical Head"
+            },
+            {
+                "name": "Gargi Gupta",
+                "url": "https://gg21-prog.github.io/#home",
+                "display_url": "gg21-prog.github.io/#home",
+                "year": "ty",
+                "description": "Intelligent Systems, RL, LLMs",
+                "position": "Sponsorship Head"
+            },
+            {
+                "name": "Pushkar Dube",
+                "url": "https://pushkardube.github.io/",
+                "display_url": "pushkardube.github.io",
+                "year": "ty",
+                "description": "Wireless Security, Localization, Embedded, Communications",
+                "position": "Sponsorship Head"
+            },
+            {
+                "name": "Mehul Totala",
+                "url": "https://coffeempty.github.io/portfolio/",
+                "display_url": "coffeempty.github.io/portfolio",
+                "year": "ty",
+                "description": "RL, LLMs, Robot Learning",
+                "position": "PR and Marketing Head"
+            },
+            {
+                "name": "Sahil Apage",
+                "url": "https://sahilapage.github.io/",
+                "display_url": "sahilapage.github.io",
+                "year": "ty",
+                "description": "Robotics",
+                "position": "PR and Marketing Head"
+            },
+            {
+                "name": "Paarth Shirsat",
+                "url": "https://paarth-shirsat.github.io/",
+                "display_url": "paarth-shirsat.github.io",
+                "year": "ty",
+                "description": "Embedded Systems, PCB Design",
+                "position": "TY Core"
+            },
+            {
+                "name": "Ved Jain",
+                "url": "https://vedjain773.github.io/",
+                "display_url": "vedjain773.github.io",
+                "year": "ty",
+                "description": "Compilers, Embedded Systems",
+                "position": "TY Core"
+            },
+            {
+                "name": "Bhakti Assar",
+                "url": "https://bhakti-a.github.io/",
+                "display_url": "bhakti-a.github.io",
+                "year": "ty",
+                "description": "Robotics, Embedded",
+                "position": "TY Core"
+            },
+            {
+                "name": "Shashvat Prabhu",
+                "url": "https://spr4bhu.github.io/",
+                "display_url": "spr4bhu.github.io",
+                "year": "ty",
+                "description": "Computer Architecture",
+                "position": "TY Core"
+            },
+            {
+                "name": "Rishiraj Rajgor",
+                "url": "https://dark-knightshanks.github.io/",
+                "display_url": "dark-knightshanks.github.io",
+                "year": "ty",
+                "description": "Embedded, Robotics, EdgeAI",
+                "position": "TY Core"
+            },
+            {
+                "name": "Archit More",
+                "url": "https://avm1234567.github.io/",
+                "display_url": "avm1234567.github.io",
+                "year": "ty",
+                "description": "Electronics,Embedded,PCB design",
+                "position": "TY Core"
+            },
+            {
+                "name": "Harshit Bhalani",
+                "url": "https://harshit6-b.github.io/",
+                "display_url": "harshit6-b.github.io",
+                "year": "ty",
+                "description": "Computer Architecture",
+                "position": "TY Core"
+            },
+            {
+                "name": "Aryan Vyapari",
+                "url": "https://4rynv.github.io",
+                "display_url": "4rynv.github.io",
+                "year": "ty",
+                "description": "Semiconductors, Automation, Embedded",
+                "position": "TY Core"
+            },
+            {
+                "name": "Abhijeet Bhalerao",
+                "url": "https://abhixb.github.io",
+                "display_url": "abhixb.github.io",
+                "year": "ty",
+                "description": "Intelligent systems , Robotics",
+                "position": "TY Core"
+            },
+            {
+                "name": "Moksh Panicker",
+                "url": "https://moxybaba.github.io/",
+                "display_url": "moxybaba.github.io",
+                "year": "ty",
+                "description": "Embedded Systems, Operating Systems",
+                "position": "TY Core"
+            },
+            {
+                "name": "Arhan Chavare",
+                "url": "https://4rhan.github.io",
+                "display_url": "4rhan.github.io",
+                "year": "ty",
+                "description": "Robotics , Reinforcement Learning",
+                "position": "TY Core"
+            },
+            {
+                "name": "Ansh Semwal",
+                "url": "https://de-funkd.github.io/",
+                "display_url": "de-funkd.github.io",
+                "year": "ly",
+                "description": "Reinforcement Learning, Intelligent Systems",
+                "position": ""
+            },
+            {
+                "name": "ksagar",
+                "url": "https://ksagar.site/",
+                "display_url": "ksagar.site",
+                "year": "ly",
+                "description": "Intelligent Systems",
+                "position": ""
+            },
+            {
+                "name": "Varun Nigudkar",
+                "url": "https://www.linkedin.com/in/varun-nigudkar-vjti/",
+                "display_url": "linkedin.com/in/varun-nigudkar-vjti",
+                "year": "ly",
+                "description": "CAD, ROS",
+                "position": ""
+            },
+            {
+                "name": "Shaunak Datar",
+                "url": "https://shaunakkdatar.github.io/",
+                "display_url": "shaunakkdatar.github.io",
+                "year": "ly",
+                "description": "RTEMS, Operating Systems, Kernel Development",
+                "position": ""
+            },
+            {
+                "name": "Vishal Mutha",
+                "url": "https://github.com/Vishal-Mutha",
+                "display_url": "github.com/Vishal-Mutha",
+                "year": "ly",
+                "description": "Embedded Systems, Robotics, ROS",
+                "position": ""
+            },
+            {
+                "name": "Shri Vishakh",
+                "url": "https://5iri.me",
+                "display_url": "5iri.me",
+                "year": "ly",
+                "description": "Comp Arch, FPGA, Hardware acceleration",
+                "position": ""
+            },
+            {
+                "name": "Prajwal Avhad",
+                "url": "https://crisiumnih.github.io",
+                "display_url": "crisiumnih.github.io",
+                "year": "ly",
+                "description": "Humanoids, Trajectory optimization, Compilers, Reinforcement Learning, Julia",
+                "position": ""
+            },
+            {
+                "name": "Sujal Dwivedi",
+                "url": "https://5usu.github.io/",
+                "display_url": "5usu.github.io",
+                "year": "ly",
+                "description": "World Models, FPGA, ML, Quantization",
+                "position": ""
+            },
+            {
+                "name": "Aaditya Joil",
+                "url": "https://github.com/JaytidaA",
+                "display_url": "github.com/JaytidaA",
+                "year": "ly",
+                "description": "Embedded, OS, Graphics",
+                "position": ""
+            },
+            {
+                "name": "Kartikeya Pathak",
+                "url": "https://noobmaster-version.github.io/spongefal/index.html",
+                "display_url": "noobmaster-version.github.io/spongefal/index.html",
+                "year": "ly",
+                "description": "Embedded Systems, ROS, CAD",
+                "position": ""
+            },
+            {
+                "name": "Harsh Sagare",
+                "url": "https://www.linkedin.com/in/harsh-sagare-8aa005293/",
+                "display_url": "linkedin.com/in/harsh-sagare-8aa005293",
+                "year": "ly",
+                "description": "Mechanical Designing, ROS, Controls & System",
+                "position": ""
+            },
+            {
+                "name": "Ameya Tikhe",
+                "url": "https://aged-mind-c51.notion.site/Hi-I-am-Ameya-Tikhe-1b27d6a4665e80db8954f10a4a0f5f2d",
+                "display_url": "aged-mind-c51.notion.site/Hi-I-am-Ameya-Tikhe-1b27d6a4665e80db8954f10a4a0f5f2d",
+                "year": "ly",
+                "description": "CAD, Graphic Design, Advertising",
+                "position": ""
+            },
+            {
+                "name": "Suchit Garad",
+                "url": "https://ilegend509.me/",
+                "display_url": "ilegend509.me",
+                "year": "ly",
+                "description": "FPGA, Digital Signal Processing, Digital Design",
+                "position": ""
+            },
+            {
+                "name": "Shaurya Rane",
+                "url": "https://www.linkedin.com/in/shaurya-rane-b22882283/",
+                "display_url": "linkedin.com/in/shaurya-rane-b22882283",
+                "year": "ly",
+                "description": "Embedded systems , OS, Kernel Dev , Electronics",
+                "position": ""
+            },
+            {
+                "name": "Advait Desai",
+                "url": "https://advait2211.github.io/",
+                "display_url": "advait2211.github.io",
+                "year": "ly",
+                "description": "Reinforcement learning, AI/ML",
+                "position": ""
             }
         ];
 
-        const alumni = [];
-
-        let currentView = 'grid'; // 'grid' or 'list'
-        let currentFilter = 'ty'; // Start with TY
-
-        function loadMembers() {
-            renderMembers('ty');
+        function parseCSV(text) {
+            const rows = [];
+            let row = [], field = '', inQuotes = false;
+            for (let i = 0; i < text.length; i++) {
+                const c = text[i];
+                if (inQuotes) {
+                    if (c === '"') {
+                        if (text[i + 1] === '"') { field += '"'; i++; }
+                        else { inQuotes = false; }
+                    } else { field += c; }
+                } else if (c === '"') { inQuotes = true; }
+                else if (c === ',') { row.push(field); field = ''; }
+                else if (c === '\n') { row.push(field); rows.push(row); row = []; field = ''; }
+                else if (c !== '\r') { field += c; }
+            }
+            if (field.length || row.length) { row.push(field); rows.push(row); }
+            return rows;
         }
 
-        function toggleView(view) {
-            currentView = view;
-
-            // Update UI buttons
-            document.getElementById('btn-grid').classList.toggle('active', view === 'grid');
-            document.getElementById('btn-list').classList.toggle('active', view === 'list');
-
-            renderMembers(currentFilter);
+        function esc(s) {
+            return String(s == null ? '' : s).replace(/[&<>"']/g, c => ({
+                '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+            }[c]));
         }
 
+        function displayUrl(u) {
+            return u.trim().replace(/^https?:\/\//, '').replace(/^www\./, '').replace(/\/$/, '');
+        }
 
+        function keywords(desc) {
+            return (desc || '').split(',').map(t => t.trim()).filter(Boolean);
+        }
 
-        function renderMembers(filter = 'ty') {
-            currentFilter = filter;
-            const container = document.getElementById('members-container');
-            const viewToggle = document.getElementById('ty-view-toggle');
-
-            // Show/Hide Toggle
-            if (filter === 'ty') {
-                viewToggle.classList.add('visible');
-            } else {
-                viewToggle.classList.remove('visible');
-            }
-
-            // Trigger Fade Animation
-            container.classList.remove('fade-in');
-            void container.offsetWidth; // trigger reflow
-            container.classList.add('fade-in');
-
-            container.innerHTML = '';
-
-
-
-            // Determine Layout
-            let layoutClass = 'grid';
-            if (filter === 'ty' && currentView === 'grid') {
-                layoutClass = 'ty-grid';
-            }
-            container.className = `${layoutClass} fade-in`;
-
-            const filtered = filter === 'all' ? members : members.filter(m => m.year === filter);
-
-            filtered.forEach(member => {
-                let card;
-
-                // Check if we should render TY Card Style
-                if (filter === 'ty' && currentView === 'grid') {
-                    // Render TY Card (Image Grid)
-                    card = document.createElement('div');
-                    card.className = 'ty-card';
-                    card.onclick = () => openMemberModal(member);
-                    const imgUrl = member.image ? member.image : 'assets/download.jpeg';
-
-                    card.innerHTML = `
-                        <img src="${imgUrl}" alt="${member.name}" class="ty-card-img">
-                        <div class="ty-card-info">
-                            <div class="ty-card-name">${member.name}</div>
-                            ${member.position ? `<div class="ty-card-position">${member.position}</div>` : ''}
-                        </div>
-                    `;
-                } else {
-                    // Render Standard Card
-                    card = document.createElement('a');
-                    card.href = member.url;
-                    card.target = '_blank';
-                    card.rel = 'noopener';
-                    card.className = 'card';
-
-                    if (member.year) {
-                        card.classList.add(member.year);
-                    }
-
-                    card.innerHTML = `
-                        <div>
-                            <div class="card-name">${member.name}</div>
-                            <div class="card-url">
-                                ${member.display_url}
-                            </div>
-                        </div>
-                        <span class="card-arrow">↗</span>
-                    `;
+        function accentOf(desc) {
+            for (const w of keywords(desc)) {
+                const low = ' ' + w.toLowerCase() + ',';
+                for (const [, color, keys] of DOMAINS) {
+                    if (keys.some(k => low.includes(k))) return color;
                 }
+            }
+            return FALLBACK_COLOR;
+        }
 
-                container.appendChild(card);
-            });
+        async function fetchTab(gid, year) {
+            const res = await fetch(sheetUrl(gid));
+            if (!res.ok) throw new Error('sheet ' + res.status);
+            const rows = parseCSV(await res.text()).filter(r => r.some(c => c !== ''));
+            const [header, ...body] = rows;
+            if (!header) return [];
+            const head = header.map(h => h.trim());
+            const idx = {
+                name: head.indexOf('Name'),
+                position: head.indexOf('Position'),
+                description: head.indexOf('Description (Keywords)'),
+                url: head.indexOf('Website / Reference Link')
+            };
+            if (idx.name < 0 || idx.url < 0) return [];
+            return body
+                .filter(r => r[idx.name] && r[idx.name].trim())
+                .map(r => {
+                    const url = (r[idx.url] || '').trim();
+                    return {
+                        name: r[idx.name].trim(),
+                        url: url,
+                        display_url: displayUrl(url),
+                        year: year,
+                        description: (r[idx.description] || '').trim(),
+                        position: idx.position >= 0 ? (r[idx.position] || '').trim() : ''
+                    };
+                });
+        }
+
+        async function fetchMembers() {
+            const [ty, ly] = await Promise.all([
+                fetchTab(TY_GID, 'ty'),
+                fetchTab(LY_GID, 'ly')
+            ]);
+            return ty.concat(ly);
+        }
+
+        let all = members;
+        let currentFilter = 'ty';
+
+        function visible() {
+            return all.filter(m => m.year === currentFilter);
         }
 
         function filterList(year) {
-            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
-            renderMembers(year);
+            currentFilter = year;
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.toggle('active', b.dataset.year === year));
+            renderMembers(visible());
         }
 
-        /* Modal Logic */
-        /* Modal Logic */
-        function openMemberModal(member) {
-            const modal = document.getElementById('member-modal');
-            const body = document.getElementById('modal-body');
-            const imgUrl = member.image ? member.image : 'assets/download.jpeg';
-
-            // Generate Tags
-            let tagsHtml = '';
-            if (member.description) {
-                const tags = member.description.split(',').map(tag => tag.trim()).filter(tag => tag.length > 0);
-                if (tags.length > 0) {
-                    tagsHtml = `<div class="tag-container">
-                        ${tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
-                     </div>`;
-                } else {
-                    tagsHtml = `<div class="modal-desc">${member.description}</div>`;
-                }
-            } else {
-                tagsHtml = '<div class="modal-desc">No description available yet.</div>';
-            }
-
-            body.innerHTML = `
-                <img src="${imgUrl}" alt="${member.name}" class="modal-image">
-                <div class="modal-name">${member.name}</div>
-                ${tagsHtml}
-                <div class="modal-links">
-                     <a href="${member.url}" target="_blank" rel="noopener" class="card-url">${member.display_url} ↗</a>
-                </div>
-            `;
-
-            modal.classList.add('active');
+        function renderMembers(list) {
+            const container = document.getElementById('members-container');
+            container.className = 'ly-grid fade-in';
+            container.innerHTML = list.map(m => {
+                const open = m.url ? `<a href="${esc(m.url)}" target="_blank" rel="noopener"` : '<div';
+                const close = m.url ? '</a>' : '</div>';
+                return `
+                ${open} class="ly-card${m.url ? '' : ' no-link'}" style="--accent: ${accentOf(m.description)}">
+                    <div class="ly-card-name">${esc(m.name)}</div>
+                    <div class="ly-card-tags">
+                        ${keywords(m.description).map(t => `<span class="ly-tag">${esc(t)}</span>`).join('')}
+                    </div>
+                    ${m.position ? `<span class="ly-card-pos">${esc(m.position)}</span>` : ''}
+                ${close}
+            `; }).join('');
         }
 
-        function closeMemberModal(e) {
-            // Close if clicked on overlay or close button
-            if (e.target.classList.contains('modal-overlay') || e.target.classList.contains('modal-close') || e.key === 'Escape') {
-                document.getElementById('member-modal').classList.remove('active');
-            }
+        function loadMembers() {
+            renderMembers(visible());
+            fetchMembers()
+                .then(list => { if (list.length) { all = list; renderMembers(visible()); } })
+                .catch(() => { });
         }
-
-        // Close on Escape key
-        document.addEventListener('keydown', function (event) {
-            if (event.key === "Escape") {
-                document.getElementById('member-modal').classList.remove('active');
-            }
-        });
 
         loadMembers();
     </script>
