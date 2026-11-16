@@ -161,6 +161,7 @@
 
         /* Active Filter Colors */
         /* Active Filter Colors */
+
         .filter-btn.ty.active {
             background: rgba(56, 140, 56, 0.1);
             border-color: rgb(56, 140, 56);
@@ -178,9 +179,6 @@
             border-color: rgb(89, 46, 131);
             color: rgb(89, 46, 131);
         }
-
-
-
 
         /* Section */
         .section-title {
@@ -295,7 +293,6 @@
             box-shadow: none;
         }
 
-
         /* Animations */
         @keyframes fadeInUp {
             from {
@@ -380,6 +377,27 @@
                 grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
             }
         }
+
+        /* Year filter colours */
+        .filter-btn[data-year="sy"].active,
+        .filter-btn[data-year="sy"]:hover {
+            background: rgba(232, 86, 107, 0.1);
+            border-color: #E8566B;
+            color: #E8566B;
+        }
+
+        .filter-btn[data-year="ty"]:hover {
+            background: rgba(56, 140, 56, 0.1);
+            border-color: rgb(56, 140, 56);
+            color: rgb(56, 140, 56);
+        }
+
+        .filter-btn[data-year="ly"]:hover {
+            background: rgba(89, 46, 131, 0.1);
+            border-color: rgb(89, 46, 131);
+            color: rgb(89, 46, 131);
+        }
+
     </style>
 </head>
 
@@ -397,6 +415,7 @@
         </header>
 
         <nav class="filter-nav">
+            <button class="filter-btn sy" data-year="sy" onclick="filterList('sy')">SY</button>
             <button class="filter-btn ty active" data-year="ty" onclick="filterList('ty')">TY</button>
             <button class="filter-btn ly" data-year="ly" onclick="filterList('ly')">LY</button>
         </nav>
@@ -452,6 +471,7 @@
         const SHEET_ID = '1496o5qlTT6BNEyps08rZdNUiCzFrpyQH_oVcfJHtaYg';
         const TY_GID = '0';
         const LY_GID = '1525488612';
+        const SY_GID = '2060286164'; // SY_Members tab
 
         function sheetUrl(gid) {
             return `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv&gid=${gid}`;
@@ -470,7 +490,7 @@
 
         const members = [
             {
-                "name": "Vrusthee Gaikwad",
+                "name": "Vrushtee Gaikwad",
                 "url": "https://vruga.site",
                 "display_url": "vruga.site",
                 "year": "ty",
@@ -863,12 +883,99 @@
                 });
         }
 
+        // The SY tab comes from the existing member response spreadsheet.
+        // SY intentionally contains only Name and Website/Reference Link.
+        async function fetchSyMembers() {
+            const res = await fetch(sheetUrl(SY_GID));
+            if (!res.ok) throw new Error('SY sheet HTTP ' + res.status);
+            const rows = parseCSV(await res.text()).filter(r => r.some(c => c.trim() !== ''));
+            if (!rows.length) return [];
+            const header = rows.shift().map(h => h.trim().toLowerCase().replace(/[\s/_-]+/g, ''));
+            const nameIndex = header.indexOf('name');
+            const urlIndex = header.findIndex(h => [
+                'websitereferencelink', 'website', 'websitelink', 'websiteurl', 'url'
+            ].includes(h));
+            if (nameIndex < 0 || urlIndex < 0) {
+                throw new Error('SY tab must contain Name and Website/Reference Link columns');
+            }
+            return rows.filter(r => (r[nameIndex] || '').trim()).map(r => {
+                const raw = (r[urlIndex] || '').trim();
+                const url = /^https?:\/\//i.test(raw) ? raw
+                    : /^(?:[a-z\d-]+\.)+[a-z]{2,}(?:[\/?#]|$)/i.test(raw) ? 'https://' + raw
+                    : '';
+                return {
+                    name: r[nameIndex].trim(),
+                    url,
+                    display_url: displayUrl(url),
+                    year: 'sy',
+                    description: '',
+                    position: 'SY Core'
+                };
+            });
+        }
+
+        // Six evenly distributed colours (including purple), shuffled on load.
+        // Distances 1/2/3 cover horizontal, vertical and diagonal neighbours
+        // in the site's two-column card grid. No TY/LY colours use this logic.
+        function colourSyMembers(list) {
+            const palette = DOMAINS.map(([, colour]) => colour);
+            if (palette.length < 4) throw new Error('SY needs at least four accent colours');
+            const chosen = [];
+
+            function shuffled(array) {
+                const copy = [...array];
+                for (let i = copy.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [copy[i], copy[j]] = [copy[j], copy[i]];
+                }
+                return copy;
+            }
+
+            while (chosen.length < list.length) {
+                const batch = [];
+                const size = Math.min(palette.length, list.length - chosen.length);
+
+                function fill(available) {
+                    if (batch.length === size) return true;
+                    const at = chosen.length + batch.length;
+                    for (const colour of shuffled(available)) {
+                        const isAdjacent = [1, 2, 3].some(distance => {
+                            const index = at - distance;
+                            if (index < 0) return false;
+                            return (index < chosen.length
+                                ? chosen[index]
+                                : batch[index - chosen.length]) === colour;
+                        });
+                        if (isAdjacent) continue;
+                        batch.push(colour);
+                        if (fill(available.filter(c => c !== colour))) return true;
+                        batch.pop();
+                    }
+                    return false;
+                }
+
+                if (!fill(palette)) throw new Error('Could not allocate SY accent colours');
+                chosen.push(...batch);
+            }
+            return list.map((member, i) => ({ ...member, accent: chosen[i] }));
+        }
+
+        let syLoadState = 'loading';
+
         async function fetchMembers() {
             const [ty, ly] = await Promise.all([
                 fetchTab(TY_GID, 'ty'),
                 fetchTab(LY_GID, 'ly')
             ]);
-            return ty.concat(ly);
+            let sy = [];
+            try {
+                sy = await fetchSyMembers();
+                syLoadState = 'ready';
+            } catch (error) {
+                syLoadState = 'error';
+                console.error('Could not load SY members:', error);
+            }
+            return ty.concat(ly, colourSyMembers(sy));
         }
 
         let all = members;
@@ -884,7 +991,29 @@
             renderMembers(visible());
         }
 
+        function renderSyMembers(list) {
+            const container = document.getElementById('members-container');
+            container.className = 'ly-grid fade-in';
+            if (!list.length) {
+                container.textContent = syLoadState === 'error'
+                    ? 'Could not load SY members. Check spreadsheet sharing and console errors.'
+                    : syLoadState === 'loading' ? 'Loading SY members...'
+                    : 'No SY members found.';
+                return;
+            }
+            container.innerHTML = list.map(m => {
+                const open = m.url ? `<a href="${esc(m.url)}" target="_blank" rel="noopener"` : '<div';
+                const close = m.url ? '</a>' : '</div>';
+                return `
+                ${open} class="ly-card${m.url ? '' : ' no-link'}" style="--accent: ${esc(m.accent)}">
+                    <div class="ly-card-name">${esc(m.name)}</div>
+                    <span class="ly-card-pos">SY Core</span>
+                ${close}
+            `; }).join('');
+        }
+
         function renderMembers(list) {
+            if (currentFilter === 'sy') return renderSyMembers(list);
             const container = document.getElementById('members-container');
             container.className = 'ly-grid fade-in';
             container.innerHTML = list.map(m => {
